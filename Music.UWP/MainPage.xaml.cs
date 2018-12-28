@@ -1,6 +1,9 @@
 ﻿using Music.Model;
 using Music.Model.Data;
 using Music.UWP.Services;
+using Music.UWP.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,31 +17,34 @@ namespace Music.UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private List<MenuButton> menuButtons = new List<MenuButton>();
+
         public MainPage()
         {
             this.InitializeComponent();
+            menuButtons.Add(new MenuButton("Artists", "\xE13D", typeof(ArtistListPage)));
+            menuButtons.Add(new MenuButton("Albums", "\xE93C", typeof(AlbumListPage)));
+            menuButtons.Add(new MenuButton("Genres", "\xEC4F", typeof(AlbumListPage)));
+            IconsListBox.ItemsSource = menuButtons;
+
         }
 
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-			using (ModelContext db = new ModelContext())
-			{
-				Artists.ItemsSource = db.Artists.ToList();
-			}
 			Mp3Reader reader = new Mp3Reader();
 			reader.ReadFile();
 		}
 
-		private void Add_Click(object sender, RoutedEventArgs e)
-		{
-			using (ModelContext db = new ModelContext())
-			{
-				Artist artist = new Artist { Name = NewArtistName.Text };
-				db.Artists.Add(artist);
-				db.SaveChanges();
+        private void IconsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MenuButton selectedButton = (MenuButton) IconsListBox.SelectedItem;
+            MyFrame.Navigate(selectedButton.NavigateTo);
+            
+        }
 
-				Artists.ItemsSource = db.Artists.ToList();
-			}
-		}
-	}
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
+    }
 }
