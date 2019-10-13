@@ -1,5 +1,6 @@
 ﻿using Music.Model;
 using Music.Model.Data;
+using Music.UWP.Artists;
 using Music.UWP.Services;
 using Music.UWP.ViewModels;
 using System;

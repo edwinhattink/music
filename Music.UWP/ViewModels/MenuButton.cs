@@ -10,19 +10,13 @@ namespace Music.UWP.ViewModels
     {
         public MenuButton(string label, string icon, Type navigateTo)
         {
-            this.icon = icon;
-            this.label = label;
-            this.navigateTo = navigateTo;
+            Icon = icon;
+            Label = label;
+            NavigateTo = navigateTo;
         }
-        
-        private string icon;
-        public string Icon { get { return icon; } }
-
-        private string label;
-        public string Label { get { return label; } }
-
-        private Type navigateTo;
-        public Type NavigateTo { get { return navigateTo; } }
+        public string Icon { get; }
+        public string Label { get; }
+        public Type NavigateTo { get; }
 
     }
 }

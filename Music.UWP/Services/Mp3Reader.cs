@@ -2,6 +2,7 @@
 using Music.Model.Data;
 using System.IO;
 using System.Linq;
+using TagLib;
 using File = TagLib.File;
 
 namespace Music.UWP.Services
@@ -22,7 +23,10 @@ namespace Music.UWP.Services
 			foreach(string fileName in files) {
 				Track track = GetTrack(fileName);
 				File file = File.Create(fileName);
-                var picture = file.Tag.Pictures[0];
+                if (file.Tag.Pictures.Length > 0)
+                {
+                    IPicture picture = file.Tag.Pictures[0];
+                }
 				if (track.Id <= 0 && file.MimeType == "taglib/mp3")
 				{
 					Artist discArtist = GetArtist(file.Tag.FirstAlbumArtist);
