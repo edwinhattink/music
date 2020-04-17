@@ -39,7 +39,7 @@
                   ItemTemplate="{StaticResource MasterListViewItemTemplate}"
                   Grid.Row="1"
                   IsItemClickEnabled="True"
-                  ItemClick="ArtistClick">
+                  ItemClick="Artist_Click">
         </ListView>
     </Grid>
 </Page>

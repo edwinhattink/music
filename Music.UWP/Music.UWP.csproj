@@ -116,8 +116,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AlbumListPage.xaml.cs">
+    <Compile Include="Albums\AlbumListPage.xaml.cs">
       <DependentUpon>AlbumListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Albums\AlbumDetailPage.xaml.cs">
+      <DependentUpon>AlbumDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -156,9 +159,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AlbumListPage.xaml">
+    <Page Include="Albums\AlbumListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Albums\AlbumDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Artists\ArtistDetailPage.xaml">
       <SubType>Designer</SubType>
@@ -186,6 +193,9 @@
       <Project>{85c9b249-705f-4f79-b78b-a47437e54cdb}</Project>
       <Name>Music.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Base\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

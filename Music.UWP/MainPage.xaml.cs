@@ -1,11 +1,8 @@
-﻿using Music.Model;
-using Music.Model.Data;
+﻿using Music.UWP.Albums;
 using Music.UWP.Artists;
 using Music.UWP.Services;
 using Music.UWP.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

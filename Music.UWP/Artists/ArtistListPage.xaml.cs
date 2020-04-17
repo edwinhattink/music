@@ -5,13 +5,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Animation;
+using Music.Model.Repositories;
 
 namespace Music.UWP.Artists
 {
     public sealed partial class ArtistListPage : Page
     {
-        private Artist _lastArtist;
-
         public ArtistListPage()
         {
             InitializeComponent();
@@ -21,10 +20,7 @@ namespace Music.UWP.Artists
         {
             base.OnNavigatedTo(e);
 
-            using (ModelContext db = new ModelContext())
-            {
-                Artists.ItemsSource = db.Artists.ToList();
-            }
+            Artists.ItemsSource = ArtistRepository.GetList();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -32,6 +28,8 @@ namespace Music.UWP.Artists
             using (ModelContext db = new ModelContext())
             {
                 Artist artist = new Artist { Name = NewArtistName.Text };
+
+
                 db.Artists.Add(artist);
                 db.SaveChanges();
 
@@ -40,10 +38,9 @@ namespace Music.UWP.Artists
         }
         
 
-        private void ArtistClick(object sender, ItemClickEventArgs e)
+        private void Artist_Click(object sender, ItemClickEventArgs e)
         {
-            Artist clickedItem = (Artist)e.ClickedItem;
-            _lastArtist = clickedItem;
+            Artist clickedItem = (Artist) e.ClickedItem;
             
             Frame.Navigate(typeof(ArtistDetailPage), clickedItem.Id, new DrillInNavigationTransitionInfo());            
         }
