@@ -13,8 +13,7 @@ namespace Music.Model
 		public int AlbumId { get; set; }
 		public Album Album { get; set; }
 
-		public int ArtistId { get; set; }
-		public Artist Artist { get; set; }
+		public List<DiscContribution> DiscContributions { get; set; }
 
 		public List<Track> Tracks { get; set; }
 	}

@@ -9,6 +9,6 @@ namespace Music.Model
 
 		public List<Contribution> Contributions { get; set; }
 
-		public List<Disc> Discs { get; set; }
+		public List<DiscContribution> DiscContributions { get; set; }
 	}
 }

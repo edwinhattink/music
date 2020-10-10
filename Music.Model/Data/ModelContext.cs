@@ -11,9 +11,10 @@ namespace Music.Model.Data
 		public DbSet<Disc> Discs { get; set; }
 		public DbSet<Genre> Genres { get; set; }
 		public DbSet<Track> Tracks { get; set; }
-		
+        public DbSet<DiscContribution> DiscContributions { get; set; }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlite("Data Source=Library.db");
 			base.OnConfiguring(optionsBuilder);
