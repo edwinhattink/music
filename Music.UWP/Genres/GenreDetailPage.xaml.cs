@@ -1,34 +1,45 @@
-﻿using Music.Model;
-using Windows.UI.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Music.Model;
 using Music.Model.Repositories;
+using Windows.UI.Core;
+using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Music.UWP.Artists
+namespace Music.UWP.Genres
 {
-    public sealed partial class ArtistDetailPage : Page
+    public sealed partial class GenreDetailPage : Page
     {
         private static DependencyProperty s_itemProperty
-            = DependencyProperty.Register("Item", typeof(Artist), typeof(ArtistDetailPage), new PropertyMetadata(null));
+            = DependencyProperty.Register("Item", typeof(Genre), typeof(GenreDetailPage), new PropertyMetadata(null));
 
         public static DependencyProperty ItemProperty
         {
             get { return s_itemProperty; }
         }
 
-        public Artist Item
+        public Genre Genre
         {
-            get { return (Artist)GetValue(s_itemProperty); }
+            get { return (Genre)GetValue(s_itemProperty); }
             set { SetValue(s_itemProperty, value); }
         }
 
-        public ArtistDetailPage()
+        public GenreDetailPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -36,7 +47,7 @@ namespace Music.UWP.Artists
             base.OnNavigatedTo(e);
 
             // Parameter is item ID
-            Item = ArtistRepository.GetById((int)e.Parameter);
+            Genre = GenreRepository.GetById((int)e.Parameter);
 
             var backStack = Frame.BackStack;
             var backStackCount = backStack.Count;
@@ -50,7 +61,7 @@ namespace Music.UWP.Artists
                 // will show the correct item in the side-by-side view.
                 var modifiedEntry = new PageStackEntry(
                     masterPageEntry.SourcePageType,
-                    Item.Id,
+                    Genre.Id,
                     masterPageEntry.NavigationTransitionInfo
                     );
                 backStack.Add(modifiedEntry);

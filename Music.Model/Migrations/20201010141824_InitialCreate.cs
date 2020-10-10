@@ -2,7 +2,7 @@
 
 namespace Music.Model.Migrations
 {
-    public partial class InitialSetup : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,8 +68,7 @@ namespace Music.Model.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Number = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    AlbumId = table.Column<int>(nullable: false),
-                    ArtistId = table.Column<int>(nullable: false)
+                    AlbumId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,10 +79,30 @@ namespace Music.Model.Migrations
                         principalTable: "Albums",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DiscContributions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DiscId = table.Column<int>(nullable: false),
+                    ArtistId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DiscContributions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Discs_Artists_ArtistId",
+                        name: "FK_DiscContributions_Artists_ArtistId",
                         column: x => x.ArtistId,
                         principalTable: "Artists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DiscContributions_Discs_DiscId",
+                        column: x => x.DiscId,
+                        principalTable: "Discs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -166,14 +185,19 @@ namespace Music.Model.Migrations
                 column: "TrackId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DiscContributions_ArtistId",
+                table: "DiscContributions",
+                column: "ArtistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DiscContributions_DiscId",
+                table: "DiscContributions",
+                column: "DiscId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Discs_AlbumId",
                 table: "Discs",
                 column: "AlbumId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Discs_ArtistId",
-                table: "Discs",
-                column: "ArtistId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tracks_DiscId",
@@ -192,10 +216,16 @@ namespace Music.Model.Migrations
                 name: "Contributions");
 
             migrationBuilder.DropTable(
+                name: "DiscContributions");
+
+            migrationBuilder.DropTable(
                 name: "ContributionTypes");
 
             migrationBuilder.DropTable(
                 name: "Tracks");
+
+            migrationBuilder.DropTable(
+                name: "Artists");
 
             migrationBuilder.DropTable(
                 name: "Discs");
@@ -205,9 +235,6 @@ namespace Music.Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "Albums");
-
-            migrationBuilder.DropTable(
-                name: "Artists");
         }
     }
 }

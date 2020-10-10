@@ -131,6 +131,12 @@
     <Compile Include="Artists\ArtistListPage.xaml.cs">
       <DependentUpon>ArtistListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Genres\GenreDetailPage.xaml.cs">
+      <DependentUpon>GenreDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Genres\GenreListPage.xaml.cs">
+      <DependentUpon>GenreListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -175,6 +181,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Genres\GenreDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Genres\GenreListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -182,7 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.2</Version>
+      <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="taglib">
       <Version>2.1.0</Version>

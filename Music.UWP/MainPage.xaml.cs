@@ -1,5 +1,6 @@
 ﻿using Music.UWP.Albums;
 using Music.UWP.Artists;
+using Music.UWP.Genres;
 using Music.UWP.Services;
 using Music.UWP.ViewModels;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Music.UWP
             this.InitializeComponent();
             menuButtons.Add(new MenuButton("Artists", "\xE13D", typeof(ArtistListPage)));
             menuButtons.Add(new MenuButton("Albums", "\xE93C", typeof(AlbumListPage)));
-            menuButtons.Add(new MenuButton("Genres", "\xEC4F", typeof(AlbumListPage)));
+            menuButtons.Add(new MenuButton("Genres", "\xEC4F", typeof(GenreListPage)));
             IconsListBox.ItemsSource = menuButtons;
 
         }

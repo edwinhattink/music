@@ -8,8 +8,8 @@ using Music.Model.Data;
 namespace Music.Model.Migrations
 {
     [DbContext(typeof(ModelContext))]
-    [Migration("20181223131359_InitialSetup")]
-    partial class InitialSetup
+    [Migration("20201010141824_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,8 +86,6 @@ namespace Music.Model.Migrations
 
                     b.Property<int>("AlbumId");
 
-                    b.Property<int>("ArtistId");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("Number");
@@ -96,9 +94,25 @@ namespace Music.Model.Migrations
 
                     b.HasIndex("AlbumId");
 
+                    b.ToTable("Discs");
+                });
+
+            modelBuilder.Entity("Music.Model.DiscContribution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ArtistId");
+
+                    b.Property<int>("DiscId");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("ArtistId");
 
-                    b.ToTable("Discs");
+                    b.HasIndex("DiscId");
+
+                    b.ToTable("DiscContributions");
                 });
 
             modelBuilder.Entity("Music.Model.Genre", b =>
@@ -161,10 +175,18 @@ namespace Music.Model.Migrations
                         .WithMany("Discs")
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
 
+            modelBuilder.Entity("Music.Model.DiscContribution", b =>
+                {
                     b.HasOne("Music.Model.Artist", "Artist")
-                        .WithMany("Discs")
+                        .WithMany("DiscContributions")
                         .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Music.Model.Disc", "Disc")
+                        .WithMany("DiscContributions")
+                        .HasForeignKey("DiscId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
