@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Music.Model.Data;
 
 namespace Music.Model.Repositories
@@ -31,6 +33,14 @@ namespace Music.Model.Repositories
             }
             return album;
                 
+        }
+
+        public static List<Album> GetList()
+        {
+            using (ModelContext db = new ModelContext())
+            {
+                return db.Albums.ToList();
+            }
         }
     }
 }

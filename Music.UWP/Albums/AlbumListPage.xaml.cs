@@ -1,5 +1,6 @@
 ﻿using Music.Model;
 using Music.Model.Data;
+using Music.Model.Repositories;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,22 +26,14 @@ namespace Music.UWP.Albums
         {
             base.OnNavigatedTo(e);
 
-            using (ModelContext db = new ModelContext())
-            {
-                Albums.ItemsSource = db.Albums.ToList();
-            }
+            Albums.ItemsSource = AlbumRepository.GetList();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            using (ModelContext db = new ModelContext())
-            {
-                Album album = new Album { Name = NewAlbumName.Text };
-                db.Albums.Add(album);
-                db.SaveChanges();
-
-                Albums.ItemsSource = db.Albums.ToList();
-            }
+            Album album = new Album { Name = NewAlbumName.Text };
+            AlbumRepository.SaveAlbum(album);
+            Albums.ItemsSource = AlbumRepository.GetList();
         }
 
 

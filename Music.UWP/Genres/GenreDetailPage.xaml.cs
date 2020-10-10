@@ -24,7 +24,7 @@ namespace Music.UWP.Genres
     public sealed partial class GenreDetailPage : Page
     {
         private static DependencyProperty s_itemProperty
-            = DependencyProperty.Register("Item", typeof(Genre), typeof(GenreDetailPage), new PropertyMetadata(null));
+            = DependencyProperty.Register("Genre", typeof(Genre), typeof(GenreDetailPage), new PropertyMetadata(null));
 
         public static DependencyProperty ItemProperty
         {

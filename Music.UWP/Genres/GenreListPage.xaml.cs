@@ -40,16 +40,9 @@ namespace Music.UWP.Genres
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            using (ModelContext db = new ModelContext())
-            {
-                Genre genre = new Genre { Name = NewGenreName.Text };
-
-
-                db.Genres.Add(genre);
-                db.SaveChanges();
-
-                Genres.ItemsSource = db.Genres.ToList();
-            }
+            Genre genre = new Genre { Name = NewGenreName.Text };
+            GenreRepository.SaveGenre(genre);
+            Genres.ItemsSource = GenreRepository.GetList();
         }
 
 

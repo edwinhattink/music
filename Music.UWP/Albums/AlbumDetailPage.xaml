@@ -22,7 +22,7 @@
                 Margin="0,8"
                 Style="{ThemeResource TitleTextBlockStyle}"
                 HorizontalAlignment="Left"
-                Text="{x:Bind Item.Name}"/>
+                Text="{x:Bind Album.Name}"/>
         </StackPanel>
     </Grid>
 </Page>

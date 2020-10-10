@@ -16,14 +16,14 @@ namespace Music.UWP.Albums
     public sealed partial class AlbumDetailPage : Page
     {
         private static DependencyProperty s_itemProperty
-            = DependencyProperty.Register("Item", typeof(Album), typeof(AlbumDetailPage), new PropertyMetadata(null));
+            = DependencyProperty.Register("Album", typeof(Album), typeof(AlbumDetailPage), new PropertyMetadata(null));
 
         public static DependencyProperty ItemProperty
         {
             get { return s_itemProperty; }
         }
 
-        public Album Item
+        public Album Album
         {
             get { return (Album)GetValue(s_itemProperty); }
             set { SetValue(s_itemProperty, value); }
@@ -39,7 +39,7 @@ namespace Music.UWP.Albums
             base.OnNavigatedTo(e);
 
             // Parameter is item ID
-            Item = AlbumRepository.GetById((int)e.Parameter);
+            Album = AlbumRepository.GetById((int)e.Parameter);
 
             var backStack = Frame.BackStack;
             var backStackCount = backStack.Count;
@@ -53,7 +53,7 @@ namespace Music.UWP.Albums
                 // will show the correct item in the side-by-side view.
                 var modifiedEntry = new PageStackEntry(
                     masterPageEntry.SourcePageType,
-                    Item.Id,
+                    Album.Id,
                     masterPageEntry.NavigationTransitionInfo
                     );
                 backStack.Add(modifiedEntry);

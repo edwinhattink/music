@@ -25,16 +25,9 @@ namespace Music.UWP.Artists
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            using (ModelContext db = new ModelContext())
-            {
-                Artist artist = new Artist { Name = NewArtistName.Text };
-
-
-                db.Artists.Add(artist);
-                db.SaveChanges();
-
-                Artists.ItemsSource = db.Artists.ToList();
-            }
+            Artist artist = new Artist { Name = NewArtistName.Text };
+            ArtistRepository.SaveArtist(artist);
+            Artists.ItemsSource = AlbumRepository.GetList();
         }
         
 
