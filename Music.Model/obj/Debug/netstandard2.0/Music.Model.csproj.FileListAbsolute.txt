@@ -7,3 +7,12 @@ D:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.AssemblyInfo.
 D:\Projects\Music\Music.Model\bin\Debug\netstandard2.0\Music.Model.pdb
 D:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.dll
 D:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.pdb
+C:\Projects\Music\Music.Model\bin\Debug\netstandard2.0\Music.Model.deps.json
+C:\Projects\Music\Music.Model\bin\Debug\netstandard2.0\Music.Model.dll
+C:\Projects\Music\Music.Model\bin\Debug\netstandard2.0\Music.Model.pdb
+C:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.csprojAssemblyReference.cache
+C:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.csproj.CoreCompileInputs.cache
+C:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.AssemblyInfoInputs.cache
+C:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.AssemblyInfo.cs
+C:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.dll
+C:\Projects\Music\Music.Model\obj\Debug\netstandard2.0\Music.Model.pdb
