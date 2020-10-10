@@ -115,11 +115,18 @@ namespace Music.UWP.Services
 				{
 					Album = album,
 					Number = discNumber,
-					Artist = discArtist,
 				};
 				db.Discs.Add(disc);
-			}
-			SaveChanges();
+                SaveChanges();
+
+                DiscContribution discContribution = new DiscContribution
+                {
+                    Artist = discArtist,
+                    Disc = disc,
+                };
+                db.DiscContributions.Add(discContribution);
+                SaveChanges();
+            }
 			return disc;
 		}
 
