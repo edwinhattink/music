@@ -28,26 +28,6 @@
                 <ListView Name="IconsListBox" 
                          SelectionMode="Single"
                          SelectionChanged="IconsListBox_SelectionChanged">
-                    <!--<ListBoxItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE13D;" FontSize="36" />
-                            <TextBlock Text="Artists" FontSize="24" Margin="20,0,0,0" />
-                        </StackPanel>
-                    </ListBoxItem>
-
-                    <ListBoxItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE93C;" FontSize="36" />
-                            <TextBlock Text="Albums" FontSize="24" Margin="20,0,0,0" />
-                        </StackPanel>
-                    </ListBoxItem>
-
-                    <ListBoxItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEC4F;" FontSize="36" />
-                            <TextBlock Text="Genres" FontSize="24" Margin="20,0,0,0" />
-                        </StackPanel>
-                    </ListBoxItem>-->
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
