@@ -1,1 +1,0 @@
-D:\Projects\Music\Music.UWP\Music.UWP.csproj;x86
