@@ -42,5 +42,13 @@ namespace Music.Model.Repositories
                 return db.Artists.ToList();
             }
         }
+
+        public static Artist GetArtistByName(string name)
+        {
+            using (ModelContext db = new ModelContext())
+            {
+                return db.Artists.FirstOrDefault(a => a.Name == name);
+            }
+        }
     }
 }

@@ -44,5 +44,21 @@ namespace Music.Model.Repositories
                 return db.Genres.ToList();
             }
         }
+
+        public static Genre GetGenreByName(string name)
+        {
+            using (ModelContext db = new ModelContext())
+            {
+                Genre genre = db.Genres.FirstOrDefault(g => g.Name == name);
+                if (genre != null)
+                {
+                    return genre;
+                }
+                genre = new Genre { Name = name };
+                db.Genres.Add(genre);
+                db.SaveChanges();
+                return genre;
+            }
+        }
     }
 }
