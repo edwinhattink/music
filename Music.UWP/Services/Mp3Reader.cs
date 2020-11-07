@@ -63,11 +63,11 @@ namespace Music.UWP.Services
 
         private List<Artist> GetArtists(string completeName) {
             List<Artist> artists = new List<Artist>();
-            char[] delimiterStrings = { '&', 'Ft.' };
+            char[] delimiterStrings = { '&' };
             string[] artistNames = completeName.Split(delimiterStrings);
             foreach(string artistName in artistNames)
             {
-                Artist = artistName.Trim();
+                artists.Add(new Artist { Name = artistName.Trim() });
 
             }
             return new List<Artist>();
