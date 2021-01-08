@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Music.Web.Controllers
+namespace Music.Web.Controllers.Api
 {
     [ApiController]
     [Route("[controller]")]
