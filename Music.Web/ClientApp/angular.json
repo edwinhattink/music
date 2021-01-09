@@ -152,5 +152,8 @@
       }
     }
   },
-  "defaultProject": "Music.Web"
+  "defaultProject": "Music.Web",
+  "cli": {
+    "analytics": "b4eda3ca-35e4-435c-81a4-27ecc8ceffce"
+  }
 }
