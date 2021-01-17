@@ -10,7 +10,7 @@ using Music.Model.Data;
 
 namespace Music.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ArtistsController : ControllerBase
     {
