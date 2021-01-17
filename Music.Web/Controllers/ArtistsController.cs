@@ -43,8 +43,7 @@ namespace Music.Web.Controllers
         }
 
         // PUT: api/Artists/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutArtist(int id, Artist artist)
         {
@@ -75,8 +74,7 @@ namespace Music.Web.Controllers
         }
 
         // POST: api/Artists
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Artist>> PostArtist(Artist artist)
         {
@@ -88,7 +86,7 @@ namespace Music.Web.Controllers
 
         // DELETE: api/Artists/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Artist>> DeleteArtist(int id)
+        public async Task<IActionResult> DeleteArtist(int id)
         {
             var artist = await _context.Artists.FindAsync(id);
             if (artist == null)
@@ -99,7 +97,7 @@ namespace Music.Web.Controllers
             _context.Artists.Remove(artist);
             await _context.SaveChangesAsync();
 
-            return artist;
+            return NoContent();
         }
 
         private bool ArtistExists(int id)

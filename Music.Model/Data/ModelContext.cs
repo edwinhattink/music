@@ -14,15 +14,20 @@ namespace Music.Model.Data
         public DbSet<DiscContribution> DiscContributions { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		public ModelContext(DbContextOptions<ModelContext> options) : base(options)
 		{
-			optionsBuilder.UseSqlite("Data Source=Library.db");
-			base.OnConfiguring(optionsBuilder);
 		}
 
-		public ModelContext()
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-
+			modelBuilder.Entity<Album>().ToTable("Album");
+			modelBuilder.Entity<Artist>().ToTable("Artist");
+			modelBuilder.Entity<Contribution>().ToTable("Contribution");
+			modelBuilder.Entity<ContributionType>().ToTable("ContributionType");
+			modelBuilder.Entity<Disc>().ToTable("Disc");
+			modelBuilder.Entity<DiscContribution>().ToTable("DiscContribution");
+			modelBuilder.Entity<Genre>().ToTable("Genre");
+			modelBuilder.Entity<Track>().ToTable("Track");
 		}
 	}
 }
