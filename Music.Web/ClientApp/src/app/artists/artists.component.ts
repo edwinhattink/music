@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArtistService } from '../services/artist.service';
+import { Artist } from '../models/artist';
 
 @Component({
   selector: 'app-artists',
@@ -16,4 +16,5 @@ export class ArtistsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 }

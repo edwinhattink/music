@@ -1,22 +1,38 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Artist } from '../models/artist';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArtistService {
 
+  private baseUrl: string;
+
   constructor(
     private http: HttpClient,
-    @Inject('API_URL') private baseUrl: string
+    @Inject('API_URL') baseUrl: string
   ) {
+    this.baseUrl = `${baseUrl}/artists`;
   }
 
   public getArtists(): Observable<Artist[]> {
-    console.log(this.baseUrl);
-    return this.http.get<Artist[]>(this.baseUrl + 'artists')
+    return this.http.get<Artist[]>(this.baseUrl)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public createArtist(artist: Artist): Observable<Artist> {
+    return this.http.post<Artist>(this.baseUrl, artist, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

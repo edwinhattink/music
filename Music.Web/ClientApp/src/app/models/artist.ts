@@ -1,4 +1,4 @@
-interface Artist {
-  id: number;
+export interface Artist {
+  id?: number;
   name: string;
 }

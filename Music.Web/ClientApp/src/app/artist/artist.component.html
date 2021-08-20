@@ -1,1 +1,12 @@
-<p>artist works!</p>
+<div>
+  <div>
+    <span>{{ artist.id }}</span>
+  </div>
+  <div>
+    <input type="text" placeholder="artist-name" [(ngModel)]="artist.name" />
+  </div>
+</div>
+<div>
+  <button (click)="saveArtist()">Save</button>
+  <a routerLink="/artists">Back</a>
+</div>
