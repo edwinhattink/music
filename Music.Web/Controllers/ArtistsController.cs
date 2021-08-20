@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Music.Model;
@@ -10,7 +8,7 @@ using Music.Model.Data;
 
 namespace Music.Web.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ArtistsController : ControllerBase
     {
@@ -42,6 +40,17 @@ namespace Music.Web.Controllers
             return artist;
         }
 
+        // POST: api/Artists
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Artist>> PostArtist(Artist artist)
+        {
+            _context.Artists.Add(artist);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetArtist", new { id = artist.Id }, artist);
+        }
+
         // PUT: api/Artists/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -71,17 +80,6 @@ namespace Music.Web.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/Artists
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Artist>> PostArtist(Artist artist)
-        {
-            _context.Artists.Add(artist);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetArtist", new { id = artist.Id }, artist);
         }
 
         // DELETE: api/Artists/5

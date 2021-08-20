@@ -1,1 +1,18 @@
-<p>artists works!</p>
+<h1 id="tableLabel">Artists</h1>
+
+<p *ngIf="!artists"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="artists">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let artist of artists">
+      <td>{{ artist.id }}</td>
+      <td>{{ artist.name }}</td>
+    </tr>
+  </tbody>
+</table>
