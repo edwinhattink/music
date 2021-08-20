@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { ArtistService } from '../services/artist.service';
 
 @Component({
   selector: 'app-artists',
@@ -9,17 +10,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 export class ArtistsComponent implements OnInit {
   public artists: Artist[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Artist[]>(baseUrl + 'api/artists').subscribe(result => {
-      this.artists = result;
-    }, error => console.error(error));
+  constructor(private artistService: ArtistService) {
+    artistService.getArtists().subscribe(artists => this.artists = artists);
   }
 
   ngOnInit(): void {
   }
-}
-
-interface Artist {
-  id: number;
-  name: string;
 }

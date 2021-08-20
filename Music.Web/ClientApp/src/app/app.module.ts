@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ArtistsComponent } from './artists/artists.component';
+import { ArtistComponent } from './artist/artist.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ArtistsComponent } from './artists/artists.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ArtistsComponent
+    ArtistsComponent,
+    ArtistComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { ArtistsComponent } from './artists/artists.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'artists', component: ArtistsComponent },
+      { path: 'artists/:id', component: ArtistComponent },
     ])
   ],
   providers: [],
