@@ -28,7 +28,7 @@ export class AlbumComponent implements OnInit {
         };
         return;
       }
-      this.albumService.getAlbum(params.id).subscribe(album => {
+      this.albumService.getId(params.id).subscribe(album => {
         this.album = album;
       });
     });
@@ -36,9 +36,9 @@ export class AlbumComponent implements OnInit {
 
   saveAlbum(): void {
     if (this.album.id) {
-      this.albumService.updateAlbum(this.album).subscribe();
+      this.albumService.update(this.album).subscribe();
     } else {
-      this.albumService.createAlbum(this.album)
+      this.albumService.create(this.album)
         .subscribe(album => {
           this.album = album;
         });
@@ -47,7 +47,7 @@ export class AlbumComponent implements OnInit {
 
   deleteAlbum(): void {
     if (this.album.id) {
-      this.albumService.deleteAlbum(this.album).subscribe(() => {
+      this.albumService.delete(this.album).subscribe(() => {
         this.location.back();
       });
     }

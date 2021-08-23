@@ -27,7 +27,7 @@ export class ArtistComponent implements OnInit {
         };
         return;
       }
-      this.artistService.getArtist(params.id).subscribe(artist => {
+      this.artistService.getId(params.id).subscribe(artist => {
         this.artist = artist;
       });
     });
@@ -35,9 +35,9 @@ export class ArtistComponent implements OnInit {
 
   saveArtist(): void {
     if (this.artist.id) {
-      this.artistService.updateArtist(this.artist).subscribe();
+      this.artistService.update(this.artist).subscribe();
     } else {
-      this.artistService.createArtist(this.artist)
+      this.artistService.create(this.artist)
         .subscribe(artist => {
           this.artist = artist;
         });
@@ -46,7 +46,7 @@ export class ArtistComponent implements OnInit {
 
   deleteArtist(): void {
     if (this.artist.id) {
-      this.artistService.deleteArtist(this.artist).subscribe(() => {
+      this.artistService.delete(this.artist).subscribe(() => {
         this.location.back();
       });
     }
