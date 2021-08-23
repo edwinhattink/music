@@ -2,7 +2,7 @@
 
 <p *ngIf="!artists"><em>Loading...</em></p>
 
-<a routerLink="/artists/create">Create artist</a>
+<a [routerLink]="['/artists', 'new']">Create artist</a>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="artists">
   <thead>
@@ -14,7 +14,7 @@
   <tbody>
     <tr *ngFor="let artist of artists">
       <td>{{ artist.id }}</td>
-      <td>{{ artist.name }}</td>
+      <td><a [routerLink]="['/artists', artist.id]">{{ artist.name }}</a></td>
     </tr>
   </tbody>
 </table>

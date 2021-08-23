@@ -31,8 +31,29 @@ export class ArtistService {
       );
   }
 
+  public getArtist(artistId: number): Observable<Artist> {
+    return this.http.get<Artist>(`${this.baseUrl}/${artistId}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   public createArtist(artist: Artist): Observable<Artist> {
     return this.http.post<Artist>(this.baseUrl, artist, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public updateArtist(artist: Artist): Observable<object> {
+    return this.http.put(`${this.baseUrl}/${artist.id}`, artist, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public deleteArtist(artist: Artist): Observable<object> {
+    return this.http.delete(`${this.baseUrl}/${artist.id}`, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -47,7 +68,7 @@ export class ArtistService {
       // server-side error
       errorMessage = `Error Code: ${error.status} \nMessage: ${error.message}`;
     }
-    window.alert(errorMessage);
+    console.error(errorMessage);
     return throwError(errorMessage);
 
   }
