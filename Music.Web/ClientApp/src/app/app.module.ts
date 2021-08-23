@@ -7,20 +7,20 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistComponent } from './artist/artist.component';
+import { AlbumComponent } from './album/album.component';
+import { AlbumsComponent } from './albums/albums.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     ArtistsComponent,
-    ArtistComponent
+    ArtistComponent,
+    AlbumComponent,
+    AlbumsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,10 +28,10 @@ import { ArtistComponent } from './artist/artist.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'artists', component: ArtistsComponent },
       { path: 'artists/:id', component: ArtistComponent },
+      { path: 'albums', component: AlbumsComponent },
+      { path: 'albums/:id', component: AlbumComponent },
     ])
   ],
   providers: [],

@@ -1,0 +1,20 @@
+<h1 id="tableLabel">Albums</h1>
+
+<p *ngIf="!albums"><em>Loading...</em></p>
+
+<a [routerLink]="['/albums', 'new']">Create album</a>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="albums">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let album of albums">
+      <td>{{ album.id }}</td>
+      <td><a [routerLink]="['/albums', album.id]">{{ album.name }}</a></td>
+    </tr>
+  </tbody>
+</table>
