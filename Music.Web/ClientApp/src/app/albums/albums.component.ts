@@ -8,7 +8,7 @@ import { Album } from '../models/album';
   styleUrls: ['./albums.component.css']
 })
 export class AlbumsComponent implements OnInit {
-  public albums: Album[];
+  public albums: Album[] = [];
 
   constructor(private albumService: AlbumService) {
     albumService.getList().subscribe(albums => this.albums = albums);

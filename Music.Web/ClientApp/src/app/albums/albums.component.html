@@ -9,12 +9,14 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>Year</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let album of albums">
       <td>{{ album.id }}</td>
       <td><a [routerLink]="['/albums', album.id]">{{ album.name }}</a></td>
+      <td>{{ album.releaseYear }}</td>
     </tr>
   </tbody>
 </table>

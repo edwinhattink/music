@@ -10,58 +10,58 @@ namespace Music.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AlbumsController : ControllerBase
+    public class GenresController : ControllerBase
     {
         private readonly ModelContext _context;
 
-        public AlbumsController(ModelContext context)
+        public GenresController(ModelContext context)
         {
             _context = context;
         }
 
-        // GET: api/Albums
+        // GET: api/Genres
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Album>>> GetAlbums()
+        public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
         {
-            return await _context.Albums.ToListAsync();
+            return await _context.Genres.ToListAsync();
         }
 
-        // GET: api/Albums/5
+        // GET: api/Genres/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Album>> GetAlbum(int id)
+        public async Task<ActionResult<Genre>> GetGenre(int id)
         {
-            var album = await _context.Albums.FindAsync(id);
+            var genre = await _context.Genres.FindAsync(id);
 
-            if (album == null)
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            return album;
+            return genre;
         }
 
-        // POST: api/Albums
+        // POST: api/Genres
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Album>> PostAlbum(Album album)
+        public async Task<ActionResult<Genre>> PostGenre(Genre genre)
         {
-            _context.Albums.Add(album);
+            _context.Genres.Add(genre);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAlbum", new { id = album.Id }, album);
+            return CreatedAtAction("GetGenre", new { id = genre.Id }, genre);
         }
 
-        // PUT: api/Albums/5
+        // PUT: api/Genres/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAlbum(int id, Album album)
+        public async Task<IActionResult> PutGenre(int id, Genre genre)
         {
-            if (id != album.Id)
+            if (id != genre.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(album).State = EntityState.Modified;
+            _context.Entry(genre).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +69,7 @@ namespace Music.Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AlbumExists(id))
+                if (!GenreExists(id))
                 {
                     return NotFound();
                 }
@@ -82,25 +82,25 @@ namespace Music.Web.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Albums/5
+        // DELETE: api/Genres/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAlbum(int id)
+        public async Task<IActionResult> DeleteGenre(int id)
         {
-            var album = await _context.Albums.FindAsync(id);
-            if (album == null)
+            var genre = await _context.Genres.FindAsync(id);
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            _context.Albums.Remove(album);
+            _context.Genres.Remove(genre);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AlbumExists(int id)
+        private bool GenreExists(int id)
         {
-            return _context.Albums.Any(e => e.Id == id);
+            return _context.Genres.Any(e => e.Id == id);
         }
     }
 }

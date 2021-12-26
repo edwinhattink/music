@@ -1,0 +1,20 @@
+<h1 id="tableLabel">Discs</h1>
+
+<p *ngIf="!discs"><em>Loading...</em></p>
+
+<a [routerLink]="['/discs', 'new']">Create disc</a>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="discs">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let disc of discs">
+      <td>{{ disc.id }}</td>
+      <td><a [routerLink]="['/discs', disc.id]">{{ disc.name }}</a></td>
+    </tr>
+  </tbody>
+</table>

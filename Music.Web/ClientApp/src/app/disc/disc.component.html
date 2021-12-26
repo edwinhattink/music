@@ -1,0 +1,17 @@
+<div *ngIf="disc">
+  <div>
+    <span>{{ disc.id }}</span>
+  </div>
+  <div>
+    <input type="text" placeholder="disc-name" [(ngModel)]="disc.name" />
+  </div>
+  <div>
+    <input type="number" placeholder="release year" [(ngModel)]="disc.releaseYear" />
+  </div>
+</div>
+<div>
+  <button (click)="saveDisc()">Save</button>
+  <button (click)="deleteDisc()">Delete</button>
+  <a [routerLink]="['/discs']">Back</a>
+</div>
+ 

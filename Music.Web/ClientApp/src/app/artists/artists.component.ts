@@ -8,7 +8,7 @@ import { Artist } from '../models/artist';
   styleUrls: ['./artists.component.css']
 })
 export class ArtistsComponent implements OnInit {
-  public artists: Artist[];
+  public artists: Artist[] = [];
 
   constructor(private artistService: ArtistService) {
     artistService.getList().subscribe(artists => this.artists = artists);

@@ -1,0 +1,14 @@
+<div *ngIf="genre">
+  <div>
+    <span>{{ genre.id }}</span>
+  </div>
+  <div>
+    <input type="text" placeholder="genre-name" [(ngModel)]="genre.name" />
+  </div>
+</div>
+<div>
+  <button (click)="saveGenre()">Save</button>
+  <button (click)="deleteGenre()">Delete</button>
+  <a [routerLink]="['/genres']">Back</a>
+</div>
+ 

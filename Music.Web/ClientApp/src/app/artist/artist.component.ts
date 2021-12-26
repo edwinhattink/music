@@ -11,20 +11,19 @@ import {Location} from '@angular/common';
 })
 export class ArtistComponent implements OnInit {
 
-  artist: Artist;
+  public artist: Artist = <Artist>{};
 
   constructor(
     private artistService: ArtistService,
     private route: ActivatedRoute,
     private location: Location
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (isNaN(params.id) === true) {
-        this.artist = {
-          name: null,
-        };
+        this.artist = <Artist>{};
         return;
       }
       this.artistService.getId(params.id).subscribe(artist => {

@@ -10,58 +10,58 @@ namespace Music.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AlbumsController : ControllerBase
+    public class DiscsController : ControllerBase
     {
         private readonly ModelContext _context;
 
-        public AlbumsController(ModelContext context)
+        public DiscsController(ModelContext context)
         {
             _context = context;
         }
 
-        // GET: api/Albums
+        // GET: api/Discs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Album>>> GetAlbums()
+        public async Task<ActionResult<IEnumerable<Disc>>> GetDiscs()
         {
-            return await _context.Albums.ToListAsync();
+            return await _context.Discs.ToListAsync();
         }
 
-        // GET: api/Albums/5
+        // GET: api/Discs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Album>> GetAlbum(int id)
+        public async Task<ActionResult<Disc>> GetDisc(int id)
         {
-            var album = await _context.Albums.FindAsync(id);
+            var disc = await _context.Discs.FindAsync(id);
 
-            if (album == null)
+            if (disc == null)
             {
                 return NotFound();
             }
 
-            return album;
+            return disc;
         }
 
-        // POST: api/Albums
+        // POST: api/Discs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Album>> PostAlbum(Album album)
+        public async Task<ActionResult<Disc>> PostDisc(Disc disc)
         {
-            _context.Albums.Add(album);
+            _context.Discs.Add(disc);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAlbum", new { id = album.Id }, album);
+            return CreatedAtAction("GetDisc", new { id = disc.Id }, disc);
         }
 
-        // PUT: api/Albums/5
+        // PUT: api/Discs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAlbum(int id, Album album)
+        public async Task<IActionResult> PutDisc(int id, Disc disc)
         {
-            if (id != album.Id)
+            if (id != disc.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(album).State = EntityState.Modified;
+            _context.Entry(disc).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +69,7 @@ namespace Music.Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AlbumExists(id))
+                if (!DiscExists(id))
                 {
                     return NotFound();
                 }
@@ -82,25 +82,25 @@ namespace Music.Web.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Albums/5
+        // DELETE: api/Discs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAlbum(int id)
+        public async Task<IActionResult> DeleteDisc(int id)
         {
-            var album = await _context.Albums.FindAsync(id);
-            if (album == null)
+            var disc = await _context.Discs.FindAsync(id);
+            if (disc == null)
             {
                 return NotFound();
             }
 
-            _context.Albums.Remove(album);
+            _context.Discs.Remove(disc);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AlbumExists(int id)
+        private bool DiscExists(int id)
         {
-            return _context.Albums.Any(e => e.Id == id);
+            return _context.Discs.Any(e => e.Id == id);
         }
     }
 }

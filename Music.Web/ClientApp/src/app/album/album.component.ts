@@ -11,21 +11,19 @@ import {Location} from '@angular/common';
 })
 export class AlbumComponent implements OnInit {
 
-  album: Album;
+  public album: Album = <Album>{};
 
   constructor(
     private albumService: AlbumService,
     private route: ActivatedRoute,
     private location: Location
-  ) { }
+  ) {
+   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (isNaN(params.id) === true) {
-        this.album = {
-          name: null,
-          releaseYear: null,
-        };
+        this.album = <Album>{};
         return;
       }
       this.albumService.getId(params.id).subscribe(album => {
