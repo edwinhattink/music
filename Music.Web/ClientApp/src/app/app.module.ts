@@ -17,6 +17,7 @@ import { GenreComponent } from './genre/genre.component';
 import { GenresComponent } from './genres/genres.component';
 import { TrackComponent } from './track/track.component';
 import { TracksComponent } from './tracks/tracks.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TracksComponent } from './tracks/tracks.component';
       { path: 'genres/:id', component: GenreComponent },
       { path: 'tracks', component: TracksComponent },
       { path: 'tracks/:id', component: TrackComponent },
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
