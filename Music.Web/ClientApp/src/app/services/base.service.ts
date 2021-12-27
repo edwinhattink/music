@@ -16,6 +16,8 @@ export abstract class BaseService<T extends BaseModel> {
   ) {
   }
 
+  protected abstract mapToSend(model: T): object;
+
   public getList(): Observable<T[]> {
     return this.http.get<T[]>(this.baseUrl)
       .pipe(
@@ -31,14 +33,14 @@ export abstract class BaseService<T extends BaseModel> {
   }
 
   public create(model: T): Observable<T> {
-    return this.http.post<T>(this.baseUrl, model, httpOptions)
+    return this.http.post<T>(this.baseUrl, this.mapToSend(model), httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   public update(model: T): Observable<object> {
-    return this.http.put(`${this.baseUrl}/${model.id}`, model, httpOptions)
+    return this.http.put(`${this.baseUrl}/${model.id}`, this.mapToSend(model), httpOptions)
       .pipe(
         catchError(this.handleError)
       );

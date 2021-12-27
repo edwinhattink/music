@@ -7,10 +7,18 @@ import { BaseService } from './base.service';
   providedIn: 'root'
 })
 export class ArtistService extends BaseService<Artist> {
+
   constructor(
     http: HttpClient,
     @Inject('API_URL') baseUrl: string
   ) {
     super(http,  `${baseUrl}/artists`);
+  }
+
+  protected mapToSend(model: Artist): object {
+    return {
+      id: model.id,
+      name: model.name,
+    };
   }
 }

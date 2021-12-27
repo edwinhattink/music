@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Music.Model;
@@ -21,16 +20,20 @@ namespace Music.Web.Controllers
 
         // GET: api/Genres
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
+        public ActionResult<IEnumerable<Genre>> GetGenres()
         {
-            return await _context.Genres.ToListAsync();
+            return _context.Genres.ToList();
         }
 
         // GET: api/Genres/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Genre>> GetGenre(int id)
+        public ActionResult<Genre> GetGenre(int id)
         {
-            var genre = await _context.Genres.FindAsync(id);
+            var genre = _context.Genres
+                .Where(x => x.Id == id)
+                .Include(genre => genre.ParentGenre)
+                .Include(genre => genre.Genres)
+                .FirstOrDefault();
 
             if (genre == null)
             {
@@ -43,10 +46,10 @@ namespace Music.Web.Controllers
         // POST: api/Genres
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Genre>> PostGenre(Genre genre)
+        public ActionResult<Genre> PostGenre(Genre genre)
         {
             _context.Genres.Add(genre);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return CreatedAtAction("GetGenre", new { id = genre.Id }, genre);
         }
@@ -54,7 +57,7 @@ namespace Music.Web.Controllers
         // PUT: api/Genres/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGenre(int id, Genre genre)
+        public IActionResult PutGenre(int id, Genre genre)
         {
             if (id != genre.Id)
             {
@@ -65,7 +68,7 @@ namespace Music.Web.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -84,16 +87,21 @@ namespace Music.Web.Controllers
 
         // DELETE: api/Genres/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGenre(int id)
+        public IActionResult DeleteGenre(int id)
         {
-            var genre = await _context.Genres.FindAsync(id);
+            var genre = _context.Genres.Include(genre => genre.Genres).FirstOrDefault(genre => genre.Id == id);
             if (genre == null)
             {
                 return NotFound();
             }
 
+            if (genre.Genres.Any())
+            {
+                return BadRequest();
+            }
+
             _context.Genres.Remove(genre);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return NoContent();
         }

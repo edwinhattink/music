@@ -13,4 +13,8 @@ export class TrackService extends BaseService<Track> {
   ) {
     super(http,  `${baseUrl}/tracks`);
   }
+
+  protected mapToSend(model: Track): object {
+    throw new Error('Method not implemented.');
+  }
 }

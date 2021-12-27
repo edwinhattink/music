@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Genre } from '../models/genre';
 import { GenreService } from '../services/genre.service';
 import {Location} from '@angular/common';
@@ -12,11 +12,16 @@ import {Location} from '@angular/common';
 export class GenreComponent implements OnInit {
   public genre: Genre = <Genre>{};
 
+  public selectableGenres: Genre[] = [];
+
   constructor(
     private genreService: GenreService,
     private route: ActivatedRoute,
-    private location: Location
-  ) { }
+    private location: Location,
+    private router: Router
+  ) {
+    genreService.getList().subscribe(genres => this.selectableGenres = genres);
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -26,6 +31,9 @@ export class GenreComponent implements OnInit {
       }
       this.genreService.getId(params.id).subscribe(genre => {
         this.genre = genre;
+        if (genre.parentGenre) {
+          this.genre.parentGenre = this.selectableGenres.find(g => g.id === genre.parentGenre?.id);
+        }
       });
     });
   }
@@ -36,7 +44,7 @@ export class GenreComponent implements OnInit {
     } else {
       this.genreService.create(this.genre)
         .subscribe(genre => {
-          this.genre = genre;
+          this.router.navigate(['/genres', genre.id]);
         });
     }
   }

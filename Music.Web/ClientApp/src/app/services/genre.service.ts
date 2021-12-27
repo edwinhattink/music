@@ -7,10 +7,19 @@ import { BaseService } from './base.service';
   providedIn: 'root'
 })
 export class GenreService extends BaseService<Genre> {
+
   constructor(
     http: HttpClient,
     @Inject('API_URL') baseUrl: string
   ) {
     super(http,  `${baseUrl}/genres`);
+  }
+
+  protected mapToSend(model: Genre): object {
+    return {
+      id: model.id,
+      name: model.name,
+      parentGenreId: model.parentGenre?.id,
+    };
   }
 }
