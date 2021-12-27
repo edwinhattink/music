@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Music.Model
 {
@@ -8,7 +6,6 @@ namespace Music.Model
 	{
 		public int Id { get; set; }
 		public int Number { get; set; }
-		public string Name { get; set; }
 
 		public int AlbumId { get; set; }
 		public Album Album { get; set; }

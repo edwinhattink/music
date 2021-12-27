@@ -1,1 +1,20 @@
-<p>artists works!</p>
+<h1 id="tableLabel">Artists</h1>
+
+<p *ngIf="!artists"><em>Loading...</em></p>
+
+<a [routerLink]="['/artists', 'new']">Create artist</a>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="artists">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let artist of artists">
+      <td>{{ artist.id }}</td>
+      <td><a [routerLink]="['/artists', artist.id]">{{ artist.name }}</a></td>
+    </tr>
+  </tbody>
+</table>

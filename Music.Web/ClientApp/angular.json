@@ -13,9 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "progress": false,
-            "extractCss": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -25,11 +23,15 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -48,19 +50,19 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Music.Web:build"
+            "browserTarget": "Music.Web:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -82,7 +84,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -91,24 +92,14 @@
             ]
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist-server",
             "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.server.json"
+            "tsConfig": "src/tsconfig.server.json",
+            "sourceMap": true,
+            "optimization": false
           },
           "configurations": {
             "dev": {
@@ -125,7 +116,8 @@
               "namedChunks": false,
               "extractLicenses": true
             }
-          }
+          },
+          "defaultConfiguration": ""
         }
       }
     },
@@ -139,21 +131,12 @@
             "protractorConfig": "e2e/protractor.conf.js",
             "devServerTarget": "Music.Web:serve"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     }
   },
   "defaultProject": "Music.Web",
   "cli": {
-    "analytics": "b4eda3ca-35e4-435c-81a4-27ecc8ceffce"
+    "analytics": "2c2cd5e4-dc6a-4559-978e-04b3179059c6"
   }
 }

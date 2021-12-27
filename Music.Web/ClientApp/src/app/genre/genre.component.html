@@ -1,0 +1,41 @@
+<div *ngIf="genre">
+  <div>
+    <span>{{ genre.id }}</span>
+  </div>
+  <div>
+    <input type="text" placeholder="genre-name" [(ngModel)]="genre.name" />
+  </div>
+    
+  <div>
+    Main genre:
+    <select [(ngModel)]="genre.parentGenre">
+      <option [ngValue]="null">None</option>
+      <option *ngFor="let option of selectableGenres" 
+        [ngValue]="option">
+        {{ option.name }}
+      </option>
+    </select>
+    <a *ngIf="genre.parentGenre" [routerLink]="['/genres', genre.parentGenre.id]">
+      {{ genre.parentGenre.name }}
+    </a>
+  </div>    
+    
+  <div *ngIf="genre.id">
+    <div *ngIf="genre.genres.length > 0">  
+      Subgenres  
+      <ul>
+        <li *ngFor="let subGenre of genre.genres">
+          <a [routerLink]="['/genres', subGenre.id]">
+            {{ subGenre.name }}
+          </a>
+        </li>
+      </ul>
+    </div>    
+  </div>
+</div>
+<div>
+  <button (click)="saveGenre()">Save</button>
+  <button (click)="deleteGenre()">Delete</button>
+  <a [routerLink]="['/genres']">Back</a>
+</div>
+ 

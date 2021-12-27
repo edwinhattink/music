@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Music.Model;
@@ -42,9 +40,19 @@ namespace Music.Web.Controllers
             return artist;
         }
 
+        // POST: api/Artists
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Artist>> PostArtist(Artist artist)
+        {
+            _context.Artists.Add(artist);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetArtist", new { id = artist.Id }, artist);
+        }
+
         // PUT: api/Artists/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutArtist(int id, Artist artist)
         {
@@ -74,21 +82,9 @@ namespace Music.Web.Controllers
             return NoContent();
         }
 
-        // POST: api/Artists
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Artist>> PostArtist(Artist artist)
-        {
-            _context.Artists.Add(artist);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetArtist", new { id = artist.Id }, artist);
-        }
-
         // DELETE: api/Artists/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Artist>> DeleteArtist(int id)
+        public async Task<IActionResult> DeleteArtist(int id)
         {
             var artist = await _context.Artists.FindAsync(id);
             if (artist == null)
@@ -99,7 +95,7 @@ namespace Music.Web.Controllers
             _context.Artists.Remove(artist);
             await _context.SaveChangesAsync();
 
-            return artist;
+            return NoContent();
         }
 
         private bool ArtistExists(int id)

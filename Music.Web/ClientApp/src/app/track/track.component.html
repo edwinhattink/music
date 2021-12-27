@@ -1,0 +1,17 @@
+<div *ngIf="track">
+  <div>
+    <span>{{ track.id }}</span>
+  </div>
+  <div>
+    <input type="text" placeholder="track-name" [(ngModel)]="track.name" />
+  </div>
+  <div>
+    <input type="number" placeholder="release year" [(ngModel)]="track.releaseYear" />
+  </div>
+</div>
+<div>
+  <button (click)="saveTrack()">Save</button>
+  <button (click)="deleteTrack()">Delete</button>
+  <a [routerLink]="['/tracks']">Back</a>
+</div>
+ 

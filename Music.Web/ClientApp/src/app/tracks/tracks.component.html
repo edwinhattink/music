@@ -1,0 +1,20 @@
+<h1 id="tableLabel">Tracks</h1>
+
+<p *ngIf="!tracks"><em>Loading...</em></p>
+
+<a [routerLink]="['/tracks', 'new']">Create track</a>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="tracks">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let track of tracks">
+      <td>{{ track.id }}</td>
+      <td><a [routerLink]="['/tracks', track.id]">{{ track.name }}</a></td>
+    </tr>
+  </tbody>
+</table>

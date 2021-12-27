@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Music.Model.Data;
 
 namespace Music.Web
 {
@@ -21,7 +23,27 @@ namespace Music.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .SetIsOriginAllowedToAllowWildcardSubdomains();
+                    });
+            });
+            services.AddAuthentication(IISDefaults.AuthenticationScheme);
+
+            services.AddDbContext<ModelContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -42,7 +64,7 @@ namespace Music.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UsePathBase(new PathString("/api"));
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -51,6 +73,8 @@ namespace Music.Web
             }
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

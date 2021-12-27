@@ -1,23 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ArtistsComponent } from './artists/artists.component';
+import { ArtistComponent } from './artist/artist.component';
+import { AlbumComponent } from './album/album.component';
+import { AlbumsComponent } from './albums/albums.component';
+import { DiscComponent } from './disc/disc.component';
+import { DiscsComponent } from './discs/discs.component';
+import { GenreComponent } from './genre/genre.component';
+import { GenresComponent } from './genres/genres.component';
+import { TrackComponent } from './track/track.component';
+import { TracksComponent } from './tracks/tracks.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    AppComponent, NavMenuComponent, HomeComponent, ArtistsComponent, ArtistComponent, AlbumComponent, AlbumsComponent,
+    DiscComponent, DiscsComponent, GenreComponent, GenresComponent, TrackComponent, TracksComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,10 +29,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ]),
-    BrowserAnimationsModule
+      { path: 'albums', component: AlbumsComponent },
+      { path: 'albums/:id', component: AlbumComponent },
+      { path: 'artists', component: ArtistsComponent },
+      { path: 'artists/:id', component: ArtistComponent },
+      { path: 'discs', component: DiscsComponent },
+      { path: 'discs/:id', component: DiscComponent },
+      { path: 'genres', component: GenresComponent },
+      { path: 'genres/:id', component: GenreComponent },
+      { path: 'tracks', component: TracksComponent },
+      { path: 'tracks/:id', component: TrackComponent },
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

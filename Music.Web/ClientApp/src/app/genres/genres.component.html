@@ -1,0 +1,20 @@
+<h1 id="tableLabel">Genres</h1>
+
+<p *ngIf="!genres"><em>Loading...</em></p>
+
+<a [routerLink]="['/genres', 'new']">Create genre</a>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="genres">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let genre of genres">
+      <td>{{ genre.id }}</td>
+      <td><a [routerLink]="['/genres', genre.id]">{{ genre.name }}</a></td>
+    </tr>
+  </tbody>
+</table>

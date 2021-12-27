@@ -1,0 +1,17 @@
+<div *ngIf="album">
+  <div>
+    <span>{{ album.id }}</span>
+  </div>
+  <div>
+    <input type="text" placeholder="album-name" [(ngModel)]="album.name" />
+  </div>
+  <div>
+    <input type="number" placeholder="release year" [(ngModel)]="album.releaseYear" />
+  </div>
+</div>
+<div>
+  <button (click)="saveAlbum()">Save</button>
+  <button (click)="deleteAlbum()">Delete</button>
+  <a [routerLink]="['/albums']">Back</a>
+</div>
+ 
