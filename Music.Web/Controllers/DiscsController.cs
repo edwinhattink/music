@@ -21,16 +21,16 @@ namespace Music.Web.Controllers
 
         // GET: api/Discs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Disc>>> GetDiscs()
+        public ActionResult<IEnumerable<Disc>> GetDiscs()
         {
-            return await _context.Discs.ToListAsync();
+            return _context.Discs.ToList();
         }
 
         // GET: api/Discs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Disc>> GetDisc(int id)
+        public ActionResult<Disc> GetDisc(int id)
         {
-            var disc = await _context.Discs.FindAsync(id);
+            var disc = _context.Discs.FirstOrDefault(disc => disc.Id == id);
 
             if (disc == null)
             {
@@ -43,10 +43,10 @@ namespace Music.Web.Controllers
         // POST: api/Discs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Disc>> PostDisc(Disc disc)
+        public ActionResult<Disc> PostDisc(Disc disc)
         {
             _context.Discs.Add(disc);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return CreatedAtAction("GetDisc", new { id = disc.Id }, disc);
         }
@@ -54,7 +54,7 @@ namespace Music.Web.Controllers
         // PUT: api/Discs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDisc(int id, Disc disc)
+        public IActionResult PutDisc(int id, Disc disc)
         {
             if (id != disc.Id)
             {
@@ -65,7 +65,7 @@ namespace Music.Web.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -84,16 +84,27 @@ namespace Music.Web.Controllers
 
         // DELETE: api/Discs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDisc(int id)
+        public IActionResult DeleteDisc(int id)
         {
-            var disc = await _context.Discs.FindAsync(id);
+            var disc = _context.Discs.Include(disc => disc.DiscContributions).FirstOrDefault(disc => disc.Id == id);
             if (disc == null)
             {
                 return NotFound();
             }
 
+            bool discHasTracks = _context.Tracks.Where(track => track.DiscId == disc.Id).Any();
+            if (discHasTracks)
+            {
+                return BadRequest();
+            }
+
+            foreach (var contribution in disc.DiscContributions)
+            {
+                _context.DiscContributions.Remove(contribution);
+            }
+
             _context.Discs.Remove(disc);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return NoContent();
         }
