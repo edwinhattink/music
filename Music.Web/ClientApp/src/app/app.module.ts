@@ -18,6 +18,8 @@ import { GenresComponent } from './genres/genres.component';
 import { TrackComponent } from './track/track.component';
 import { TracksComponent } from './tracks/tracks.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'tracks', component: TracksComponent },
       { path: 'tracks/:id', component: TrackComponent },
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
