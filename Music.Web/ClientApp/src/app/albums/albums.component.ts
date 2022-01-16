@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumService } from '../services/album.service';
 import { Album } from '../models/album';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-albums',
@@ -11,11 +12,17 @@ export class AlbumsComponent implements OnInit {
   public displayedColumns: string[] = ['id', 'name', 'year'];
   public albums: Album[] = [];
 
-  constructor(private albumService: AlbumService) {
+  constructor(
+    private albumService: AlbumService,
+    private router: Router
+    ) {
     albumService.getList().subscribe(albums => this.albums = albums);
   }
 
   ngOnInit(): void {
   }
 
+  goToAlbum(album: Album): void {
+    this.router.navigate(['albums', album.id]);
+  }
 }
