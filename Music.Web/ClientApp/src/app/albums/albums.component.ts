@@ -8,6 +8,7 @@ import { Album } from '../models/album';
   styleUrls: ['./albums.component.css']
 })
 export class AlbumsComponent implements OnInit {
+  public displayedColumns: string[] = ['id', 'name', 'year'];
   public albums: Album[] = [];
 
   constructor(private albumService: AlbumService) {

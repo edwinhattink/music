@@ -19,7 +19,9 @@ import { TrackComponent } from './track/track.component';
 import { TracksComponent } from './tracks/tracks.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     ]),
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatTabsModule
+    MatButtonModule,
+    MatTableModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

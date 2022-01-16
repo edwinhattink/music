@@ -1,0 +1,7 @@
+span {
+  margin-right: 10px;
+}
+
+.selected {
+  background: rgba(0,0,0,.2);
+}

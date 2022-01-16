@@ -1,14 +1,13 @@
 <mat-toolbar color="primary">
   <span>Music library</span>
-  <span class="example-fill-remaining-space"></span>  
+  <nav>
+    <a mat-button
+      *ngFor="let link of navLinks"
+      [routerLink]="link.link"
+      [class.selected]="link.index === activeLinkIndex">
+      {{ link.label }}
+    </a>
+  </nav>  
 </mat-toolbar> 
-<nav mat-tab-nav-bar>
-  <a mat-tab-link
-    *ngFor="let link of navLinks"
-    [routerLink]="link.link"
-    routerLinkActive #rla="routerLinkActive"
-    [active]="rla.isActive">
-    {{ link.label }}
-  </a>
-</nav>
+
 <router-outlet></router-outlet>
