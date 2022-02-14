@@ -1,20 +1,19 @@
-<h1 id="tableLabel">Discs</h1>
-
-<p *ngIf="!discs"><em>Loading...</em></p>
-
-<a [routerLink]="['/discs', 'new']">Create disc</a>
-
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="discs">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let disc of discs">
-      <td>{{ disc.id }}</td>
-      <td><a [routerLink]="['/discs', disc.id]">{{ disc.name }}</a></td>
-    </tr>
-  </tbody>
-</table>
+<mat-card>
+  <a mat-button [routerLink]="['discs', 'new']">Create disc</a>
+  
+  <table mat-table [dataSource]="discs">
+    
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let disc">{{ disc.id }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="number">
+      <th mat-header-cell *matHeaderCellDef>Number</th>
+      <td mat-cell *matCellDef="let disc">{{ disc.number }}</td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let disc; columns: displayedColumns;" (click)="goToDisc(disc)"></tr>
+  </table>
+</mat-card>
