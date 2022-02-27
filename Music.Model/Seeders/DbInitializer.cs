@@ -10,7 +10,7 @@ namespace Music.Model.Seeders
         {
             context.Database.EnsureCreated();
 
-            // Look for any students.
+            // Look for any albums.
             if (context.Albums.Any())
             {
                 return;   // DB has been seeded

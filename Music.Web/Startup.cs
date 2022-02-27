@@ -36,7 +36,8 @@ namespace Music.Web
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
             services.AddDbContext<ModelContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
