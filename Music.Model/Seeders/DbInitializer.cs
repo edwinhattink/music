@@ -8,7 +8,8 @@ namespace Music.Model.Seeders
     {
         public static void Initialize(ModelContext context)
         {
-            context.Database.EnsureCreated();
+            context.Database.EnsureDeleted();
+            var test = context.Database.EnsureCreated();
 
             // Look for any albums.
             if (context.Albums.Any())
@@ -57,7 +58,7 @@ namespace Music.Model.Seeders
             context.Genres.Add(euphoricHardstyle);
             context.SaveChanges();
 
-            context.Discs.Add(new Disc { AlbumId = 1, Number = 1 });
+            context.Discs.Add(new Disc { AlbumId = 1, Number = 1, Name = "Disc One" });
             context.SaveChanges();
 
             context.DiscContributions.Add(new DiscContribution { ArtistId = 1, DiscId = 1 });

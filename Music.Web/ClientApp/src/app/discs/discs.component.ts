@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./discs.component.css']
 })
 export class DiscsComponent implements OnInit {
-  public displayedColumns: string[] = ['id', 'number'];
+  public displayedColumns: string[] = ['id', 'number', 'name'];
   public discs: Disc[] = [];
 
   constructor(
