@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Track } from '../models/track';
 import { TrackService } from '../services/track.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { GenreService } from '../services/genre.service';
+import { Genre } from '../models/genre';
 
 @Component({
   selector: 'app-track',
@@ -11,12 +13,16 @@ import {Location} from '@angular/common';
 })
 export class TrackComponent implements OnInit {
   public track: Track = <Track>{};
+  public genres: Genre[] = [];
 
   constructor(
     private trackService: TrackService,
     private route: ActivatedRoute,
-    private location: Location
-  ) { }
+    private location: Location,
+    private genreService: GenreService
+  ) { 
+    genreService.getList().subscribe(genres => this.genres = genres);
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -26,6 +32,9 @@ export class TrackComponent implements OnInit {
       }
       this.trackService.getId(params.id).subscribe(track => {
         this.track = track;
+        if (track.genreId) {
+          this.track.genre = this.genres.find(g => g.id === track.genreId);
+        }
       });
     });
   }

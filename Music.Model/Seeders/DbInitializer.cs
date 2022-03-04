@@ -8,8 +8,7 @@ namespace Music.Model.Seeders
     {
         public static void Initialize(ModelContext context)
         {
-            context.Database.EnsureDeleted();
-            var test = context.Database.EnsureCreated();
+            context.Database.EnsureCreated();
 
             // Look for any albums.
             if (context.Albums.Any())

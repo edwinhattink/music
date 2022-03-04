@@ -1,14 +1,28 @@
-<div *ngIf="track">
+<mat-card *ngIf="track">
   <div>
     <span>{{ track.id }}</span>
   </div>
-  <div>
-    <input type="text" placeholder="track-name" [(ngModel)]="track.name" />
+  <div class="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Number</mat-label>
+      <input matInput type="number" [(ngModel)]="track.number" min="0" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="track.name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Genre</mat-label>
+      <mat-select [(ngModel)]="track.genre">
+        <mat-option *ngFor="let option of genres" [value]="option">
+          {{ option.name }}        
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-  <div>
-    <input type="number" placeholder="release year" [(ngModel)]="track.releaseYear" />
-  </div>
-</div>
+</mat-card>
 <div>
   <button (click)="saveTrack()">Save</button>
   <button (click)="deleteTrack()">Delete</button>

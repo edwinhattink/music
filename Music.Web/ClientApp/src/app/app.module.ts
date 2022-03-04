@@ -26,6 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { MatOptionModule } from '@angular/material/core';
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
