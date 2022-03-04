@@ -19,7 +19,8 @@ export class TrackService extends BaseService<Track> {
       id: model.id,
       name: model.name,
       number: model.number,
-      parentGenreId: model.genre?.id,
+      discId: model.disc?.id,
+      genreId: model.genre?.id,
     };
   }
 }

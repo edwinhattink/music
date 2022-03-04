@@ -3,14 +3,24 @@
     <span>{{ track.id }}</span>
   </div>
   <div class="form">
-    <mat-form-field appearance="fill">
-      <mat-label>Number</mat-label>
-      <input matInput type="number" [(ngModel)]="track.number" min="0" />
-    </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input matInput [(ngModel)]="track.name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Disc</mat-label>
+      <mat-select [(ngModel)]="track.disc">
+        <mat-option *ngFor="let option of discs" [value]="option">
+          {{ option.name }}        
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Number</mat-label>
+      <input matInput type="number" [(ngModel)]="track.number" min="0" />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
