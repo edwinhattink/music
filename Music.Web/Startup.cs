@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -37,7 +36,8 @@ namespace Music.Web
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
             services.AddDbContext<ModelContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

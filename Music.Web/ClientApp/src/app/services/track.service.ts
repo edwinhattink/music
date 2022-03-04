@@ -11,10 +11,16 @@ export class TrackService extends BaseService<Track> {
     http: HttpClient,
     @Inject('API_URL') baseUrl: string
   ) {
-    super(http,  `${baseUrl}/tracks`);
+    super(http, `${baseUrl}/tracks`);
   }
 
   protected mapToSend(model: Track): object {
-    throw new Error('Method not implemented.');
+    return {
+      id: model.id,
+      name: model.name,
+      number: model.number,
+      discId: model.disc?.id,
+      genreId: model.genre?.id,
+    };
   }
 }

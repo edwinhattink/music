@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Music.Model;
 using Music.Model.Data;
 
@@ -20,9 +19,9 @@ namespace Music.Web.Controllers
 
         // GET: api/ContributionTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ContributionType>>> GetContributionTypes()
+        public ActionResult<IEnumerable<ContributionType>> GetContributionTypes()
         {
-            return await _context.ContributionTypes.ToListAsync();
+            return _context.ContributionTypes.ToList();
         }
     }
 }

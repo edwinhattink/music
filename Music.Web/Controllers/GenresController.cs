@@ -89,13 +89,15 @@ namespace Music.Web.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteGenre(int id)
         {
-            var genre = _context.Genres.Include(genre => genre.Genres).FirstOrDefault(genre => genre.Id == id);
+            var genre = _context.Genres.Find(id);
             if (genre == null)
             {
                 return NotFound();
             }
 
-            if (genre.Genres.Any())
+            bool genreHasSubgenres = _context.Genres.Any(genre => genre.ParentGenreId == id);
+            bool genreHasTracks = _context.Tracks.Any(track => track.GenreId == genre.Id);
+            if (genreHasSubgenres || genreHasTracks)
             {
                 return BadRequest();
             }

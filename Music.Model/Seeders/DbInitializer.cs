@@ -10,7 +10,7 @@ namespace Music.Model.Seeders
         {
             context.Database.EnsureCreated();
 
-            // Look for any students.
+            // Look for any albums.
             if (context.Albums.Any())
             {
                 return;   // DB has been seeded
@@ -57,7 +57,7 @@ namespace Music.Model.Seeders
             context.Genres.Add(euphoricHardstyle);
             context.SaveChanges();
 
-            context.Discs.Add(new Disc { AlbumId = 1, Number = 1 });
+            context.Discs.Add(new Disc { AlbumId = 1, Number = 1, Name = "Disc One" });
             context.SaveChanges();
 
             context.DiscContributions.Add(new DiscContribution { ArtistId = 1, DiscId = 1 });

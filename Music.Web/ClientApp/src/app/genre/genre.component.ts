@@ -11,7 +11,6 @@ import {Location} from '@angular/common';
 })
 export class GenreComponent implements OnInit {
   public genre: Genre = <Genre>{};
-
   public selectableGenres: Genre[] = [];
 
   constructor(
