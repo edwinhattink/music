@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Disc } from '../models/disc';
 import { DiscService } from '../services/disc.service';
 import {Location} from '@angular/common';
+import { Album } from '../models/album';
+import { AlbumService } from '../services/album.service';
 
 @Component({
   selector: 'app-disc',
@@ -11,12 +13,16 @@ import {Location} from '@angular/common';
 })
 export class DiscComponent implements OnInit {
   public disc: Disc = <Disc>{};
+  public albums: Album[] = [];
 
   constructor(
     private discService: DiscService,
     private route: ActivatedRoute,
-    private location: Location
-  ) { }
+    private location: Location,
+    private albumService: AlbumService
+  ) {
+    albumService.getList().subscribe(albums => this.albums = albums);
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -26,6 +32,9 @@ export class DiscComponent implements OnInit {
       }
       this.discService.getId(params.id).subscribe(disc => {
         this.disc = disc;
+        if (this.disc.albumId) {
+          this.disc.album = this.albums.find(album => album.id === this.disc.id);
+        }
       });
     });
   }

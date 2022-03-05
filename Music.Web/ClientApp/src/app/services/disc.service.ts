@@ -18,6 +18,7 @@ export class DiscService extends BaseService<Disc> {
   protected mapToSend(model: Disc): object {
     return {
       id: model.id,
+      albumId: model.album?.id,
       number: model.number,
     };
   }

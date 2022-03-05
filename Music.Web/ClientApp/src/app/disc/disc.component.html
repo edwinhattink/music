@@ -1,17 +1,33 @@
-<div *ngIf="disc">
+<mat-card *ngIf="disc">
   <div>
     <span>{{ disc.id }}</span>
   </div>
-  <div>
-    <input type="text" placeholder="disc-name" [(ngModel)]="disc.name" />
+
+  <div class="form">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Album</mat-label>
+      <mat-select [(ngModel)]="disc.album">
+        <mat-option *ngFor="let option of albums" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="disc.name" type="text" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Release year</mat-label>
+      <input matInput [(ngModel)]="disc.releaseYear" type="number" />
+    </mat-form-field>
+
   </div>
-  <div>
-    <input type="number" placeholder="release year" [(ngModel)]="disc.releaseYear" />
-  </div>
-</div>
+</mat-card>
 <div>
   <button (click)="saveDisc()">Save</button>
   <button (click)="deleteDisc()">Delete</button>
   <a [routerLink]="['/discs']">Back</a>
 </div>
- 
