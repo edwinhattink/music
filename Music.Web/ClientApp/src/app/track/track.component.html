@@ -6,18 +6,18 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="track.name" />
+      <input matInput [(ngModel)]="track.name" type="text" />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Disc</mat-label>
       <mat-select [(ngModel)]="track.disc">
         <mat-option *ngFor="let option of discs" [value]="option">
-          {{ option.name }}        
+          {{ option.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    
+
     <mat-form-field appearance="fill">
       <mat-label>Number</mat-label>
       <input matInput type="number" [(ngModel)]="track.number" min="0" />
@@ -27,7 +27,7 @@
       <mat-label>Genre</mat-label>
       <mat-select [(ngModel)]="track.genre">
         <mat-option *ngFor="let option of genres" [value]="option">
-          {{ option.name }}        
+          {{ option.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -38,4 +38,3 @@
   <button (click)="deleteTrack()">Delete</button>
   <a [routerLink]="['/tracks']">Back</a>
 </div>
- 

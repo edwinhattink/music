@@ -1,17 +1,21 @@
-<div *ngIf="album">
+<mat-card *ngIf="album">
   <div>
     <span>{{ album.id }}</span>
   </div>
-  <div>
-    <input type="text" placeholder="album-name" [(ngModel)]="album.name" />
+  <div class="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="album.name" type="text" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Relase year</mat-label>
+      <input matInput [(ngModel)]="album.releaseYear" type="number" />
+    </mat-form-field>
   </div>
-  <div>
-    <input type="number" placeholder="release year" [(ngModel)]="album.releaseYear" />
-  </div>
-</div>
+</mat-card>
 <div>
   <button (click)="saveAlbum()">Save</button>
   <button (click)="deleteAlbum()">Delete</button>
   <a [routerLink]="['/albums']">Back</a>
 </div>
- 
