@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Genre } from '../models/genre';
-import { GenreService } from '../services/genre.service';
+import { Genre } from '../../models';
+import { GenreService } from '../../services';
 import {Location} from '@angular/common';
 
 @Component({

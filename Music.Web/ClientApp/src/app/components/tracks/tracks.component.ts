@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TrackService } from '../services/track.service';
-import { Track } from '../models/track';
+import { TrackService } from '../../services';
+import { Track } from '../../models';
 import { Router } from '@angular/router';
 
 @Component({
