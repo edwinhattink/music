@@ -10,7 +10,6 @@ import {Location} from '@angular/common';
   styleUrls: ['./album.component.css']
 })
 export class AlbumComponent implements OnInit {
-  public showForm = false;
   public album: Album = <Album>{};
 
   constructor(
@@ -24,12 +23,10 @@ export class AlbumComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (isNaN(params.id) === true) {
         this.album = <Album>{};
-        this.showForm = true;
         return;
       }
       this.albumService.getId(params.id).subscribe(album => {
         this.album = album;
-        this.showForm = true;
       });
     });
   }
