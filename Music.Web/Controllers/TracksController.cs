@@ -28,9 +28,12 @@ namespace Music.Web.Controllers
 
         // GET: api/Tracks/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Track>> GetTrack(int id)
+        public ActionResult<Track> GetTrack(int id)
         {
-            var track = await _context.Tracks.FindAsync(id);
+            var track = _context.Tracks
+                .Where(t => t.Id == id)
+                .Include(t => t.Contributions)
+                .FirstOrDefault();
 
             if (track == null)
             {
