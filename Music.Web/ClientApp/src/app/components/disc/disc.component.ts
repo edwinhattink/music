@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Disc } from '../models/disc';
-import { DiscService } from '../services/disc.service';
+import { Album, Disc } from '../../models';
+import { AlbumService, DiscService } from '../../services';
 import {Location} from '@angular/common';
-import { Album } from '../models/album';
-import { AlbumService } from '../services/album.service';
 
 @Component({
   selector: 'app-disc',

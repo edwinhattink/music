@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Album } from '../models/album';
-import { AlbumService } from '../services/album.service';
+import { Album } from '../../models/album';
+import { AlbumService } from '../../services/album.service';
 import {Location} from '@angular/common';
 
 @Component({
@@ -10,7 +10,6 @@ import {Location} from '@angular/common';
   styleUrls: ['./album.component.css']
 })
 export class AlbumComponent implements OnInit {
-
   public album: Album = <Album>{};
 
   constructor(

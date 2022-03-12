@@ -1,4 +1,4 @@
-<mat-card *ngIf="disc">
+<mat-card>
   <div>
     <span>{{ disc.id }}</span>
   </div>
@@ -12,16 +12,16 @@
           {{ option.name }}
         </mat-option>
       </mat-select>
+    </mat-form-field>    
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Number</mat-label>
+      <input matInput [(ngModel)]="disc.number" type="number" />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input matInput [(ngModel)]="disc.name" type="text" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Release year</mat-label>
-      <input matInput [(ngModel)]="disc.releaseYear" type="number" />
     </mat-form-field>
 
   </div>

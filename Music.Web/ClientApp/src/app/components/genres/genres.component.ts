@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GenreService } from '../services/genre.service';
-import { Genre } from '../models/genre';
+import { GenreService } from '../../services';
+import { Genre } from '../../models';
 import { Router } from '@angular/router';
 
 @Component({

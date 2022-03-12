@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Track } from '../models/track';
-import { TrackService } from '../services/track.service';
+import { Disc, Genre, Track } from '../../models';
+import { TrackService, GenreService, DiscService } from '../../services';
 import { Location } from '@angular/common';
-import { GenreService } from '../services/genre.service';
-import { Genre } from '../models/genre';
-import { Disc } from '../models/disc';
-import { DiscService } from '../services/disc.service';
 
 @Component({
   selector: 'app-track',
@@ -24,7 +20,7 @@ export class TrackComponent implements OnInit {
     private location: Location,
     private genreService: GenreService,
     private discService: DiscService,
-  ) { 
+  ) {
     genreService.getList().subscribe(genres => this.genres = genres);
     discService.getList().subscribe(discs => this.discs = discs);
   }

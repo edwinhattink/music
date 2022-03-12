@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Artist } from '../models/artist';
-import { ArtistService } from '../services/artist.service';
+import { Artist } from '../../models';
+import { ArtistService } from '../../services';
 import {Location} from '@angular/common';
 
 @Component({
