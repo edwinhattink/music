@@ -10,7 +10,6 @@
 		public int ArtistId { get; set; }
 		public Artist Artist { get; set; }
 
-		public int ContributionTypeId { get; set; }
 		public ContributionType ContributionType { get; set; }
 	}
 }

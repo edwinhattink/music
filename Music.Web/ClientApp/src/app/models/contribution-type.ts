@@ -1,5 +1,5 @@
-import { BaseModel } from './base-model';
-
-export interface ContributionType extends BaseModel {
-  type: string;
+export enum ContributionType {
+  Main,
+	Featuring,
+	Remix
 }

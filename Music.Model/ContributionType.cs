@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace Music.Model
+﻿namespace Music.Model
 {
-	public class ContributionType
+	public enum ContributionType
 	{
-		public int Id { get; set; }
-		public string Type { get; set; }
-
-		public List<Contribution> Contributions;
+		Main,
+		Featuring,
+		Remix
 	}
 }

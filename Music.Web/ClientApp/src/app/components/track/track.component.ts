@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Disc, Genre, Track } from '../../models';
-import { TrackService, GenreService, DiscService } from '../../services';
+import { Artist, Disc, Genre, Track } from '../../models';
+import { TrackService, GenreService, DiscService, ArtistService } from '../../services';
 import { Location } from '@angular/common';
+import { FormControl } from '@angular/forms';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-track',
@@ -11,8 +17,17 @@ import { Location } from '@angular/common';
 })
 export class TrackComponent implements OnInit {
   public track: Track = <Track>{};
+  public selectedArtists: Artist[] = [];
+
+  // select fields
   public genres: Genre[] = [];
   public discs: Disc[] = [];
+
+  // artists
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  public allArtists: Artist[] = [];
+  filteredArtists: Observable<Artist[]>;
+  artistCtrl = new FormControl();
 
   constructor(
     private trackService: TrackService,
@@ -20,9 +35,18 @@ export class TrackComponent implements OnInit {
     private location: Location,
     private genreService: GenreService,
     private discService: DiscService,
+    private artistService: ArtistService,
   ) {
     genreService.getList().subscribe(genres => this.genres = genres);
     discService.getList().subscribe(discs => this.discs = discs);
+    this.filteredArtists = new Observable();
+    artistService.getList().subscribe(artists => {
+      this.allArtists = artists
+      this.filteredArtists = this.artistCtrl.valueChanges.pipe(
+        startWith(null),
+        map((artist: string | null) => (artist ? this._filter(artist) : this.allArtists.slice())),
+      );
+    });
   }
 
   ngOnInit() {
@@ -60,6 +84,37 @@ export class TrackComponent implements OnInit {
         this.location.back();
       });
     }
+  }
+
+  add(artist: Artist): void {
+    if (artist) {
+      this.selectedArtists.push(artist);
+    }
+
+    // // Clear the input value
+    // event.chipInput!.clear();
+
+    // this.fruitCtrl.setValue(null);
+  }
+
+  remove(artist: Artist): void {
+    const index = this.selectedArtists.indexOf(artist);
+    if (index >= 0) {
+      this.selectedArtists.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(event);
+    // this.selectedArtists.push(event.option.viewValue);
+    // this.fruitInput.nativeElement.value = '';
+    // this.fruitCtrl.setValue(null);
+  }
+
+  private _filter(value: string): Artist[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allArtists.filter(artist => artist.name.toLowerCase().includes(filterValue));
   }
 
 }

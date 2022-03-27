@@ -16,14 +16,6 @@ namespace Music.Model.Seeders
                 return;   // DB has been seeded
             }
 
-            var mainArtist = new ContributionType { Type = "Main" };
-            var featuring = new ContributionType { Type = "Featuring" };
-            var remix = new ContributionType { Type = "Remix" };
-
-            context.ContributionTypes.Add(mainArtist);
-            context.ContributionTypes.Add(featuring);
-            context.ContributionTypes.Add(remix);
-
             context.SaveChanges();
 
             var albums = new Album[]
@@ -69,10 +61,10 @@ namespace Music.Model.Seeders
             context.Tracks.Add(new Track { DiscId = 1, GenreId = 2, Name = "This Is Not A Test", Number = 8 });
             context.SaveChanges();
 
-            context.Contributions.Add(new Contribution { ContributionTypeId = 1, ArtistId = 1, TrackId = 1 });
-            context.Contributions.Add(new Contribution { ContributionTypeId = 1, ArtistId = 1, TrackId = 2 });
-            context.Contributions.Add(new Contribution { ContributionTypeId = 1, ArtistId = 1, TrackId = 3 });
-            context.Contributions.Add(new Contribution { ContributionTypeId = 1, ArtistId = 1, TrackId = 4 });
+            context.Contributions.Add(new Contribution { ContributionType = ContributionType.Main, ArtistId = 1, TrackId = 1 });
+            context.Contributions.Add(new Contribution { ContributionType = ContributionType.Main, ArtistId = 1, TrackId = 2 });
+            context.Contributions.Add(new Contribution { ContributionType = ContributionType.Main, ArtistId = 1, TrackId = 3 });
+            context.Contributions.Add(new Contribution { ContributionType = ContributionType.Main, ArtistId = 1, TrackId = 4 });
             context.SaveChanges();
 
         }
