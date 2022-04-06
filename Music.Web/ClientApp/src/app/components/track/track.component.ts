@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Artist, Disc, Genre, Track } from '../../models';
 import { TrackService, GenreService, DiscService, ArtistService } from '../../services';
 import { Location } from '@angular/common';
 import { FormControl } from '@angular/forms';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
@@ -26,8 +26,10 @@ export class TrackComponent implements OnInit {
   // artists
   separatorKeysCodes: number[] = [ENTER, COMMA];
   public allArtists: Artist[] = [];
-  filteredArtists: Observable<Artist[]>;
+  filteredArtists: Observable<string[]>;
   artistCtrl = new FormControl();
+
+  @ViewChild('artistInput') artistInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private trackService: TrackService,
@@ -42,9 +44,15 @@ export class TrackComponent implements OnInit {
     this.filteredArtists = new Observable();
     artistService.getList().subscribe(artists => {
       this.allArtists = artists
+
       this.filteredArtists = this.artistCtrl.valueChanges.pipe(
         startWith(null),
-        map((artist: string | null) => (artist ? this._filter(artist) : this.allArtists.slice())),
+        map((artist: string | Artist | null) => {
+          if (artist instanceof Object) {
+            return this.allArtists.map(a => a.name);
+          }
+          return this._filterArtists(artist).map(a => a.name);
+        }),
       );
     });
   }
@@ -86,35 +94,53 @@ export class TrackComponent implements OnInit {
     }
   }
 
-  add(artist: Artist): void {
-    if (artist) {
-      this.selectedArtists.push(artist);
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+        this.selectedArtists.push(this._findArtistByName(value));
     }
 
-    // // Clear the input value
-    // event.chipInput!.clear();
-
-    // this.fruitCtrl.setValue(null);
+    // Clear the input value
+    event.chipInput!.clear();
+    this.artistCtrl.setValue(null);
   }
 
   remove(artist: Artist): void {
-    const index = this.selectedArtists.indexOf(artist);
+    const index = this.selectedArtists.map(a => a.id).indexOf(artist.id);
+    console.log(index);
     if (index >= 0) {
       this.selectedArtists.splice(index, 1);
     }
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    console.log(event);
-    // this.selectedArtists.push(event.option.viewValue);
-    // this.fruitInput.nativeElement.value = '';
-    // this.fruitCtrl.setValue(null);
+  selectedArtist(event: MatAutocompleteSelectedEvent): void {
+    this.selectedArtists.push(this._findArtistByName(event.option.viewValue));
+    this.artistInput.nativeElement.value = '';
+    this.artistCtrl.setValue(null);
   }
 
-  private _filter(value: string): Artist[] {
-    const filterValue = value.toLowerCase();
+  private _filterArtists(value: string | null): Artist[] {
+    if (value) {
+      return this._filterArtistInArray(value, this.allArtists).filter(artist => !this.selectedArtists.find(a => a.id === artist.id));
+    }
+    return this.allArtists.filter(artist => !this.selectedArtists.find(a => a.id === artist.id));
+  }
 
-    return this.allArtists.filter(artist => artist.name.toLowerCase().includes(filterValue));
+  private _filterArtistInArray(name: string, artists: Artist[]) {
+    const filterValue = name.toLowerCase();
+    return artists.filter(a => a.name.toLowerCase().includes(filterValue));
+  }
+
+  private _findArtistByName(value: string): Artist {
+    const foundArtists = this._filterArtistInArray(value, this.allArtists);
+    if (foundArtists.length > 1) {
+      throw new Error("Meerdere artiesten gevonden");
+    }
+    if (foundArtists.length == 1) {
+      return foundArtists[0];
+    }
+    throw new Error("Geen artist gevonden");
   }
 
 }

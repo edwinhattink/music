@@ -50,11 +50,15 @@
           [matAutocomplete]="auto"
           [matChipInputFor]="chipList"
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event.value)">
+          (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let artist of filteredArtists | async" [value]="artist">
-          {{artist.name}}
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="selectedArtist($event)">
+        <mat-option
+          *ngFor="let artist of filteredArtists | async"
+          [value]="artist">
+          {{artist}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
