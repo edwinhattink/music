@@ -28,7 +28,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatChipsModule,
     MatAutocompleteModule,
     MatIconModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -35,36 +35,32 @@
     <mat-form-field appearance="fill">
       <mat-label>Artists</mat-label>
       <mat-chip-list #chipList aria-label="Artists">
-        <mat-chip
-          *ngFor="let artist of selectedArtists"
-          (removed)="remove(artist)">
-          {{artist.name}}
+        <mat-chip *ngFor="let contribution of contributions" (removed)="remove(contribution.artist)">
+          {{contribution.artist.name}}
           <button matChipRemove>
             <mat-icon>cancel</mat-icon>
           </button>
         </mat-chip>
-        <input
-          placeholder="New artist..."
-          #artistInput
-          [formControl]="artistCtrl"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        <input placeholder="New artist..." #artistInput [formControl]="artistCtrl" [matAutocomplete]="auto"
+          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        (optionSelected)="selectedArtist($event)">
-        <mat-option
-          *ngFor="let artist of filteredArtists | async"
-          [value]="artist">
-          {{artist}}
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedArtist($event)">
+        <mat-option *ngFor="let artist of filteredArtists | async" [value]="artist">
+          {{artist.name}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
     <div>
-      <span *ngFor="let artist of selectedArtists">{{ artist.name }}</span>
+      <div *ngFor="let contribution of contributions">
+        {{ contribution.artist.name }}
+        <mat-radio-group aria-label="Select a type" [(ngModel)]="contribution.contributionType">
+          <mat-radio-button *ngFor="let type of contributionTypes" [value]="type">
+            {{contributionType[type]}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
     </div>
   </div>
 </mat-card>

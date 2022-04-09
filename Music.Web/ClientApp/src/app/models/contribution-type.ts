@@ -1,5 +1,5 @@
 export enum ContributionType {
-  Main,
-	Featuring,
-	Remix
+  MAIN,
+  FEATURING,
+  REMIX
 }

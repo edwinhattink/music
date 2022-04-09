@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Artist, Disc, Genre, Track } from '../../models';
+import { Artist, Contribution, ContributionType, Disc, Genre, Track } from '../../models';
 import { TrackService, GenreService, DiscService, ArtistService } from '../../services';
 import { Location } from '@angular/common';
 import { FormControl } from '@angular/forms';
@@ -9,6 +9,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { findById } from 'src/app/functions/model-functions';
 
 @Component({
   selector: 'app-track',
@@ -17,7 +18,7 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class TrackComponent implements OnInit {
   public track: Track = <Track>{};
-  public selectedArtists: Artist[] = [];
+  public contributions: Contribution[] = [];
 
   // select fields
   public genres: Genre[] = [];
@@ -26,8 +27,10 @@ export class TrackComponent implements OnInit {
   // artists
   separatorKeysCodes: number[] = [ENTER, COMMA];
   public allArtists: Artist[] = [];
-  filteredArtists: Observable<string[]>;
+  filteredArtists: Observable<Artist[]>;
   artistCtrl = new FormControl();
+  contributionType = ContributionType;
+  contributionTypes: ContributionType[] = [ContributionType.MAIN, ContributionType.FEATURING, ContributionType.REMIX];
 
   @ViewChild('artistInput') artistInput: ElementRef<HTMLInputElement>;
 
@@ -43,15 +46,15 @@ export class TrackComponent implements OnInit {
     discService.getList().subscribe(discs => this.discs = discs);
     this.filteredArtists = new Observable();
     artistService.getList().subscribe(artists => {
-      this.allArtists = artists
+      this.allArtists = artists;
 
       this.filteredArtists = this.artistCtrl.valueChanges.pipe(
         startWith(null),
         map((artist: string | Artist | null) => {
           if (artist instanceof Object) {
-            return this.allArtists.map(a => a.name);
+            return this.allArtists;
           }
-          return this._filterArtists(artist).map(a => a.name);
+          return this._filterArtists(artist);
         }),
       );
     });
@@ -70,6 +73,12 @@ export class TrackComponent implements OnInit {
         }
         if (track.discId) {
           this.track.disc = this.discs.find(d => d.id === track.discId);
+        }
+        for (const contribution of track.contributions) {
+          this.contributions.push(<Contribution>{
+            artist: findById(this.allArtists, contribution.artistId),
+            contributionType: contribution.contributionType
+          });
         }
       });
     });
@@ -98,33 +107,40 @@ export class TrackComponent implements OnInit {
     const value = (event.value || '').trim();
 
     if (value) {
-        this.selectedArtists.push(this._findArtistByName(value));
+      this.contributions.push(<Contribution>{
+        artist: this._findArtistByName(value),
+        contributionType: ContributionType.MAIN
+      });
     }
 
     // Clear the input value
-    event.chipInput!.clear();
+    if (event.chipInput !== undefined) {
+      event.chipInput.clear();
+    }
     this.artistCtrl.setValue(null);
   }
 
   remove(artist: Artist): void {
-    const index = this.selectedArtists.map(a => a.id).indexOf(artist.id);
-    console.log(index);
+    const index = this.contributions.map(c => c.artist.id).indexOf(artist.id);
     if (index >= 0) {
-      this.selectedArtists.splice(index, 1);
+      this.contributions.splice(index, 1);
     }
   }
 
   selectedArtist(event: MatAutocompleteSelectedEvent): void {
-    this.selectedArtists.push(this._findArtistByName(event.option.viewValue));
+    this.contributions.push(<Contribution>{
+      artist: this._findArtistByName(event.option.viewValue),
+      contributionType: ContributionType.MAIN
+    });
     this.artistInput.nativeElement.value = '';
     this.artistCtrl.setValue(null);
   }
 
   private _filterArtists(value: string | null): Artist[] {
     if (value) {
-      return this._filterArtistInArray(value, this.allArtists).filter(artist => !this.selectedArtists.find(a => a.id === artist.id));
+      return this._filterArtistInArray(value, this.allArtists).filter(artist => !this.contributions.find(a => a.id === artist.id));
     }
-    return this.allArtists.filter(artist => !this.selectedArtists.find(a => a.id === artist.id));
+    return this.allArtists.filter(artist => !this.contributions.find(a => a.id === artist.id));
   }
 
   private _filterArtistInArray(name: string, artists: Artist[]) {
@@ -135,12 +151,12 @@ export class TrackComponent implements OnInit {
   private _findArtistByName(value: string): Artist {
     const foundArtists = this._filterArtistInArray(value, this.allArtists);
     if (foundArtists.length > 1) {
-      throw new Error("Meerdere artiesten gevonden");
+      throw new Error('Meerdere artiesten gevonden');
     }
-    if (foundArtists.length == 1) {
+    if (foundArtists.length === 1) {
       return foundArtists[0];
     }
-    throw new Error("Geen artist gevonden");
+    throw new Error('Geen artist gevonden');
   }
 
 }
