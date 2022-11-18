@@ -103,7 +103,7 @@ export class TrackComponent implements OnInit {
     }
   }
 
-  add(event: MatChipInputEvent): void {
+  addArtistByName(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
     if (value) {
