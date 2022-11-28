@@ -43,7 +43,7 @@
         </mat-chip>
         <input placeholder="New artist..." #artistInput [formControl]="artistCtrl" [matAutocomplete]="auto"
           [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)">
+          (matChipInputTokenEnd)="selectedArtist($event)">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedArtist($event)">
         <mat-option *ngFor="let artist of filteredArtists | async" [value]="artist">
