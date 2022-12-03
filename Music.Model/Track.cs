@@ -8,7 +8,7 @@ namespace Music.Model
 		public int Number { get; set; }
 		public string Name { get; set; }
 
-		public string FileName { get; set; }
+		public string? FileName { get; set; }
 
 		public int DiscId { get; set; }
 		public Disc Disc { get; set; }

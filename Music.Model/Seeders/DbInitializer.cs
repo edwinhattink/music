@@ -11,7 +11,8 @@ namespace Music.Model.Seeders
 
             string albumName = "The First Dose";
             // Look for any albums.
-            if (context.Albums.Where(a => a.Name == albumName).Any())
+            var foundAlbums = context.Albums.Where(a => a.Name == albumName).ToList();
+            if (foundAlbums.Any())
             {
                 return;   // DB has been seeded
             }
