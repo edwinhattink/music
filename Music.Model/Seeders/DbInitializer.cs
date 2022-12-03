@@ -1,6 +1,4 @@
 ﻿using Music.Model.Data;
-using System;
-using System.Linq;
 
 namespace Music.Model.Seeders
 {
@@ -10,8 +8,10 @@ namespace Music.Model.Seeders
         {
             context.Database.EnsureCreated();
 
+
+            string albumName = "The First Dose";
             // Look for any albums.
-            if (context.Albums.Any())
+            if (context.Albums.Where(a => a.Name == albumName).Any())
             {
                 return;   // DB has been seeded
             }
@@ -20,7 +20,7 @@ namespace Music.Model.Seeders
 
             var albums = new Album[]
             {
-                new Album{Name="The First Dose",ReleaseYear=2020},
+                new Album{Name=albumName,ReleaseYear=2020},
             };
             foreach (Album a in albums)
             {
