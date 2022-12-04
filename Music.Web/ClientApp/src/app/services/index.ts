@@ -4,4 +4,3 @@ export * from './base.service';
 export * from './disc.service';
 export * from './genre.service';
 export * from './track.service';
-export * from './contribution.service';

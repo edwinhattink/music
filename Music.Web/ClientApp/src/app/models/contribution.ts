@@ -5,7 +5,7 @@ import { Track } from './track';
 
 export interface Contribution extends BaseModel {
   trackId: number;
-  track?: Track;
+  track: Track;
   artistId: number;
   artist: Artist;
   contributionType: ContributionType;

@@ -6,16 +6,16 @@ namespace Music.Model
 	{
 		public int Id { get; set; }
 		public int Number { get; set; }
-		public string Name { get; set; }
+		public string Name { get; set; } = string.Empty;
 
 		public string? FileName { get; set; }
 
 		public int DiscId { get; set; }
-		public Disc Disc { get; set; }
+		public Disc? Disc { get; set; }
 
 		public int GenreId { get; set; }
-		public Genre Genre { get; set; }
+		public Genre? Genre { get; set; }
 
-		public List<Contribution> Contributions { get; set; }
+		public List<Contribution> Contributions { get; set; } = new List<Contribution>();
 	}
 }

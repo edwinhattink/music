@@ -85,6 +85,7 @@ export class TrackComponent implements OnInit {
   }
 
   saveTrack(): void {
+    this.track.contributions = this.contributions;
     if (this.track.id) {
       this.trackService.update(this.track).subscribe();
     } else {

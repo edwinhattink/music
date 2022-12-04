@@ -12,7 +12,7 @@ using Music.Model.Data;
 namespace Music.Model.Migrations
 {
     [DbContext(typeof(ModelContext))]
-    [Migration("20221203122224_InitialCreate")]
+    [Migration("20221204134648_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

@@ -21,6 +21,12 @@ export class TrackService extends BaseService<Track> {
       number: model.number,
       discId: model.disc?.id,
       genreId: model.genre?.id,
+      contributions: model.contributions.map(c => {
+        return {
+          artistId: c.artist.id,
+          contributionType: c.contributionType,
+        };
+      })
     };
   }
 }
