@@ -5,18 +5,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { ArtistsComponent } from './artists/artists.component';
-import { ArtistComponent } from './artist/artist.component';
-import { AlbumComponent } from './album/album.component';
-import { AlbumsComponent } from './albums/albums.component';
-import { DiscComponent } from './disc/disc.component';
-import { DiscsComponent } from './discs/discs.component';
-import { GenreComponent } from './genre/genre.component';
-import { GenresComponent } from './genres/genres.component';
-import { TrackComponent } from './track/track.component';
-import { TracksComponent } from './tracks/tracks.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { HomeComponent } from './components/home/home.component';
+import { ArtistsComponent } from './components/artists/artists.component';
+import { ArtistComponent } from './components/artist/artist.component';
+import { AlbumComponent } from './components/album/album.component';
+import { AlbumsComponent } from './components/albums/albums.component';
+import { DiscComponent } from './components/disc/disc.component';
+import { DiscsComponent } from './components/discs/discs.component';
+import { GenreComponent } from './components/genre/genre.component';
+import { GenresComponent } from './components/genres/genres.component';
+import { TrackComponent } from './components/track/track.component';
+import { TracksComponent } from './components/tracks/tracks.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +27,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { MatChipsModule } from '@angular/material/chips';
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
-    MatChipsModule
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

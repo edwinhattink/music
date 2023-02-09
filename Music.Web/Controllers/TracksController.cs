@@ -28,9 +28,14 @@ namespace Music.Web.Controllers
 
         // GET: api/Tracks/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Track>> GetTrack(int id)
+        public ActionResult<Track> GetTrack(int id)
         {
-            var track = await _context.Tracks.FindAsync(id);
+            var track = _context.Tracks
+                .Where(t => t.Id == id)
+                .Include(t => t.Contributions)
+                .Include(t => t.Genre)
+                .Include(t => t.Disc)
+                .FirstOrDefault();
 
             if (track == null)
             {
@@ -59,6 +64,27 @@ namespace Music.Web.Controllers
             if (id != track.Id)
             {
                 return BadRequest();
+            }
+
+            var currentContributions = await _context.Contributions.Where(c => c.TrackId == id).ToListAsync();
+            foreach (var updatedContribution in track.Contributions)
+            {
+                var contribution = currentContributions.FirstOrDefault(c => c.TrackId == id && c.ArtistId == updatedContribution.ArtistId);
+                if (contribution == null)
+                {
+                    updatedContribution.TrackId = id;
+                    _context.Contributions.Add(updatedContribution);
+                } else
+                {
+                    contribution.ContributionType = updatedContribution.ContributionType;
+                    _context.Entry(contribution).State = EntityState.Modified;
+                }
+            }
+            var toKeepArtists = track.Contributions.Select(c => c.ArtistId);
+            var toDeleteContributions = currentContributions.Where(c => !toKeepArtists.Contains(c.ArtistId));
+            foreach (var toDeleteContribution in toDeleteContributions)
+            {
+                _context.Entry(toDeleteContribution).State = EntityState.Deleted;
             }
 
             _context.Entry(track).State = EntityState.Modified;

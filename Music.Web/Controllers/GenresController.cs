@@ -95,8 +95,8 @@ namespace Music.Web.Controllers
                 return NotFound();
             }
 
-            bool genreHasSubgenres = _context.Genres.Any(genre => genre.ParentGenreId == id);
-            bool genreHasTracks = _context.Tracks.Any(track => track.GenreId == genre.Id);
+            bool genreHasSubgenres = _context.Genres.Any(genre => genre.ParentGenre.Id == id);
+            bool genreHasTracks = _context.Tracks.Any(track => track.Genre.Id == genre.Id);
             if (genreHasSubgenres || genreHasTracks)
             {
                 return BadRequest();

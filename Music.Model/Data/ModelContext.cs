@@ -7,7 +7,6 @@ namespace Music.Model.Data
 		public DbSet<Album> Albums { get; set; }
 		public DbSet<Artist> Artists { get; set; }
 		public DbSet<Contribution> Contributions { get; set; }
-		public DbSet<ContributionType> ContributionTypes { get; set; }
 		public DbSet<Disc> Discs { get; set; }
 		public DbSet<Genre> Genres { get; set; }
 		public DbSet<Track> Tracks { get; set; }
@@ -23,7 +22,6 @@ namespace Music.Model.Data
 			modelBuilder.Entity<Album>().ToTable("Album");
 			modelBuilder.Entity<Artist>().ToTable("Artist");
 			modelBuilder.Entity<Contribution>().ToTable("Contribution");
-			modelBuilder.Entity<ContributionType>().ToTable("ContributionType");
 			modelBuilder.Entity<Disc>().ToTable("Disc");
 			modelBuilder.Entity<DiscContribution>().ToTable("DiscContribution");
 			modelBuilder.Entity<Genre>().ToTable("Genre");

@@ -1,0 +1,71 @@
+<mat-card>
+  <div>
+    <span>{{ track.id }}</span>
+  </div>
+  <div class="form">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="track.name" type="text" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Disc</mat-label>
+      <mat-select [(ngModel)]="track.disc">
+        <mat-option *ngFor="let option of discs" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Number</mat-label>
+      <input matInput type="number" [(ngModel)]="track.number" min="0" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Genre</mat-label>
+      <mat-select [(ngModel)]="track.genre">
+        <mat-option *ngFor="let option of genres" [value]="option">
+          {{ option.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Artists</mat-label>
+      <mat-chip-list #chipList aria-label="Artists">
+        <mat-chip *ngFor="let contribution of contributions" (removed)="remove(contribution.artist)">
+          {{contribution.artist.name}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input placeholder="New artist..." #artistInput [formControl]="artistCtrl" [matAutocomplete]="auto"
+          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="selectedArtist($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedArtist($event)">
+        <mat-option *ngFor="let artist of filteredArtists | async" [value]="artist">
+          {{artist.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <div>
+      <div *ngFor="let contribution of contributions">
+        {{ contribution.artist.name }}
+        <mat-radio-group aria-label="Select a type" [(ngModel)]="contribution.contributionType">
+          <mat-radio-button *ngFor="let type of contributionTypes" [value]="type">
+            {{contributionType[type]}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </div>
+</mat-card>
+<div>
+  <button (click)="saveTrack()">Save</button>
+  <button (click)="deleteTrack()">Delete</button>
+  <a [routerLink]="['/tracks']">Back</a>
+</div>

@@ -92,7 +92,7 @@ namespace Music.Web.Controllers
                 return NotFound();
             }
 
-            bool discHasTracks = _context.Tracks.Where(track => track.DiscId == disc.Id).Any();
+            bool discHasTracks = _context.Tracks.Where(track => track.Disc.Id == disc.Id).Any();
             if (discHasTracks)
             {
                 return BadRequest();

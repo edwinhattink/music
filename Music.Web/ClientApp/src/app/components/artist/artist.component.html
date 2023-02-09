@@ -1,0 +1,19 @@
+<mat-card>
+  <div>
+    <span>{{ artist.id }}</span>
+  </div>
+
+  <div class="form">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="artist.name" type="text" />
+    </mat-form-field>
+
+  </div>
+</mat-card>
+<div>
+  <button (click)="saveArtist()">Save</button>
+  <button (click)="deleteArtist()">Delete</button>
+  <a [routerLink]="['/artists']">Back</a>
+</div>
