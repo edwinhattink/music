@@ -130,7 +130,7 @@ export class TrackComponent implements OnInit {
 
   selectedArtist(event: MatAutocompleteSelectedEvent): void {
     this.contributions.push(<Contribution>{
-      artist: this._findArtistByName(event.option.viewValue),
+      artist: this._findArtistByIdInArray(event.option.value.id, this.allArtists),
       contributionType: ContributionType.MAIN
     });
     this.artistInput.nativeElement.value = '';
@@ -142,6 +142,10 @@ export class TrackComponent implements OnInit {
       return this._filterArtistInArray(value, this.allArtists).filter(artist => !this.contributions.find(a => a.id === artist.id));
     }
     return this.allArtists.filter(artist => !this.contributions.find(a => a.id === artist.id));
+  }
+
+  private _findArtistByIdInArray(id: number, artists: Artist[]) {
+    return artists.find(a => a.id == id);
   }
 
   private _filterArtistInArray(name: string, artists: Artist[]) {

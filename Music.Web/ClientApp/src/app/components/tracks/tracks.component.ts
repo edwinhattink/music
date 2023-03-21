@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tracks.component.css']
 })
 export class TracksComponent implements OnInit {
-  public displayedColumns: string[] = ['id', 'number', 'artist', 'name'];
+  public displayedColumns: string[] = ['id', 'number', 'artist', 'album', 'name'];
   public tracks: Track[] = [];
 
   constructor(

@@ -26,6 +26,8 @@ namespace Music.Web.Controllers
             return await _context.Tracks
                 .Include(t => t.Contributions)
                 .ThenInclude(c => c.Artist)
+                .Include(t => t.Disc)
+                .ThenInclude(d => d.Album)
                 .ToListAsync();
         }
 
@@ -38,6 +40,7 @@ namespace Music.Web.Controllers
                 .Include(t => t.Contributions)
                 .Include(t => t.Genre)
                 .Include(t => t.Disc)
+                .ThenInclude(d => d.Album)
                 .FirstOrDefault();
 
             if (track == null)

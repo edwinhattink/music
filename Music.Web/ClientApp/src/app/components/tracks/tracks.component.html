@@ -18,6 +18,11 @@
       <td mat-cell *matCellDef="let track">{{ artistDisplay(track) }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="album">
+      <th mat-header-cell *matHeaderCellDef>Album</th>
+      <td mat-cell *matCellDef="let track">{{ track.disc.album.name }}</td>
+    </ng-container>
+
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let track">{{ track.name }}</td>

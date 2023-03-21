@@ -24,9 +24,6 @@ bld/
 [Oo]bj/
 bin
 obj
-Music.UWP/bin
-Music.UWP/obj
-
 
 # Visual Studo 2015 cache/options directory
 .vs/
@@ -209,27 +206,6 @@ FakesAssemblies/
 # Custom ignores
 gallery.xml
 project.lock.json
-Music.UWP/Test/66 Decibel 2014 Mix 3 (Mixed by Exit.mp3
-Music.UWP/Test/65 Seven.mp3
-Music.UWP/Test/64 Brutal 4.0.mp3
-Music.UWP/Test/63 Godcore (Edit).mp3
-Music.UWP/Test/62 Advocating Violence (Edit).mp3
-Music.UWP/Test/61 Codes of Behavior (Edit).mp3
-Music.UWP/Test/60 Chaos Reign.mp3
-Music.UWP/Test/59 United from the Start (Edit).mp3
-Music.UWP/Test/58 Get Down (Edit).mp3
-Music.UWP/Test/57 R.E.M. Sleep (Edit).mp3
-Music.UWP/Test/56 Insane.mp3
-Music.UWP/Test/55 #haters.mp3
-Music.UWP/Test/54 Destroy You at Once.mp3
-Music.UWP/Test/53 The Owlman.mp3
-Music.UWP/Test/52 Never Come Close (Edit).mp3
-Music.UWP/Test/51 The Change.mp3
-Music.UWP/Test/50 Back Again (Official Decibel 2014.mp3
-Music.UWP/Test/49 Never Again (Edit).mp3
-Music.UWP/Test/48 Dirty South (Edit).mp3
-Music.UWP/Test/47 The Filth (Edit).mp3
-Music.UWP/Test/46 So You Wanna Be Hardcore (Edit).mp3
-Music.UWP/Test/45 Underground Tacticz (E-Force & Lu.mp3
-Music.UWP/Test/44 Go Down (Edit).mp3
-Music.UWP/Test/43 Surrender (Edit).mp3
+
+#Music files
+Music.Web/wwwroot/Music

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Music.Model.Data;
 using Music.Model.Seeders;
 using System;
+using System.IO;
 
 namespace Music.Web
 {
