@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TrackService } from '../../services';
-import { Track } from '../../models';
+import { ContributionType, Track } from '../../models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,9 +26,28 @@ export class TracksComponent implements OnInit {
     this.router.navigate(['tracks', track.id]);
   }
 
+  trackNameDisplay(track: Track): string {
+    const remixArtists: string[] = [];
+    track.contributions.forEach(c => {
+      if (c.contributionType == ContributionType.REMIX) {
+        remixArtists.push(c.artist.name);
+      }
+    })
+
+    if (remixArtists.length < 1) {
+      return track.name;
+    }
+
+    return `${track.name} (${remixArtists.join(" & ")} Remix)`;
+  }
+
   artistDisplay(track: Track): string {
-    return track.contributions.map((contribution) => {
-      return contribution.artist.name;
-    }).join(" & ");
+    const artists: string[] = [];
+    track.contributions.forEach(c => {
+      if (c.contributionType != ContributionType.REMIX) {
+        artists.push(c.artist.name);
+      }
+    });
+    return artists.join(" & ");
   }
 }
