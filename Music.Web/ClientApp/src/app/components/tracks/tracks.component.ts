@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tracks.component.css']
 })
 export class TracksComponent implements OnInit {
-  public displayedColumns: string[] = ['id', 'number', 'name'];
+  public displayedColumns: string[] = ['id', 'number', 'artist', 'name'];
   public tracks: Track[] = [];
 
   constructor(
@@ -24,5 +24,11 @@ export class TracksComponent implements OnInit {
 
   goToTrack(track: Track): void {
     this.router.navigate(['tracks', track.id]);
+  }
+
+  artistDisplay(track: Track): string {
+    return track.contributions.map((contribution) => {
+      return contribution.artist.name;
+    }).join(" & ");
   }
 }

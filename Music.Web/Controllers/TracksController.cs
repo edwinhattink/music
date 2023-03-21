@@ -23,7 +23,10 @@ namespace Music.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Track>>> GetTracks()
         {
-            return await _context.Tracks.ToListAsync();
+            return await _context.Tracks
+                .Include(t => t.Contributions)
+                .ThenInclude(c => c.Artist)
+                .ToListAsync();
         }
 
         // GET: api/Tracks/5
