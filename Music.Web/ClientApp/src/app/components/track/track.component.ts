@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Artist, Contribution, ContributionType, Disc, Genre, Track } from '../../models';
 import { TrackService, GenreService, DiscService, ArtistService } from '../../services';
 import { Location } from '@angular/common';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -28,7 +28,7 @@ export class TrackComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   public allArtists: Artist[] = [];
   filteredArtists: Observable<Artist[]>;
-  artistCtrl = new FormControl();
+  artistCtrl = new UntypedFormControl();
   contributionType = ContributionType;
   contributionTypes: ContributionType[] = [ContributionType.MAIN, ContributionType.FEATURING, ContributionType.REMIX];
 
