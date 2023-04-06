@@ -1,4 +1,5 @@
 <mat-card>
+  <mat-card-content>
   <div>
     <span>{{ track.id }}</span>
   </div>
@@ -34,7 +35,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Artists</mat-label>
-      <mat-chip-list #chipList aria-label="Artists">
+      <mat-chip-listbox #chipList aria-label="Artists">
         <mat-chip *ngFor="let contribution of contributions" (removed)="remove(contribution.artist)">
           {{contribution.artist.name}}
           <button matChipRemove>
@@ -44,7 +45,7 @@
         <input placeholder="New artist..." #artistInput [formControl]="artistCtrl" [matAutocomplete]="auto"
           [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
           (matChipInputTokenEnd)="selectedArtist($event)">
-      </mat-chip-list>
+      </mat-chip-listbox>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedArtist($event)">
         <mat-option *ngFor="let artist of filteredArtists | async" [value]="artist">
           {{artist.name}}
@@ -63,9 +64,10 @@
       </div>
     </div>
   </div>
+  <div>
+    <button (click)="saveTrack()">Save</button>
+    <button (click)="deleteTrack()">Delete</button>
+    <a [routerLink]="['/tracks']">Back</a>
+  </div>
+  </mat-card-content>
 </mat-card>
-<div>
-  <button (click)="saveTrack()">Save</button>
-  <button (click)="deleteTrack()">Delete</button>
-  <a [routerLink]="['/tracks']">Back</a>
-</div>
