@@ -1,15 +1,12 @@
-﻿namespace Music.Model
+﻿namespace Music.Domain.Entities;
+
+public class Contribution: BaseAuditableEntity
 {
-	public class Contribution
-	{
-		public int Id { get; set; }
+    public required int TrackId { get; set; }
+    public Track? Track { get; set; }
 
-        public int TrackId { get; set; }
-        public Track? Track { get; set; }
+    public required int ArtistId { get; set; }
+    public Artist? Artist { get; set; }
 
-        public int ArtistId { get; set; }
-        public Artist? Artist { get; set; }
-
-		public ContributionType ContributionType { get; set; }
-	}
+	public required ContributionType ContributionType { get; set; }
 }

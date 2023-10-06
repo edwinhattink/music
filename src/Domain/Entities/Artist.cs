@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Music.Model
-{ 
-	public class Artist
-	{
-		public int Id { get; set; }
-		public string Name { get; set; } = string.Empty;
+namespace Music.Domain.Entities;
 
-		public List<Contribution> Contributions { get; set; } = new List<Contribution>();
+public class Artist: BaseAuditableEntity
+{
+	public required string Name { get; set; }
 
-		public List<DiscContribution> DiscContributions { get; set; } = new List<DiscContribution>();
-	}
+	public List<Contribution> Contributions { get; set; } = new List<Contribution>();
+
+	public List<DiscContribution> DiscContributions { get; set; } = new List<DiscContribution>();
 }

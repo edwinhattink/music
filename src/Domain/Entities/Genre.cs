@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 
-namespace Music.Model
+namespace Music.Domain.Entities;
+
+public class Genre: BaseAuditableEntity
 {
-	public class Genre
-	{
-		public int Id { get; set; }
-		public string Name { get; set; } = string.Empty;
+	public required string Name { get; set; }
 
-		public int? ParentGenreId { get; set; }
-		public Genre? ParentGenre { get; set; }
+	public int? ParentGenreId { get; set; }
+	public Genre? ParentGenre { get; set; }
 
-		public List<Track> Tracks { get; set; } = new List<Track>();
+	public List<Track> Tracks { get; set; } = new List<Track>();
 
-		public List<Genre> Genres { get; set; } = new List<Genre>();
+	public List<Genre> Genres { get; set; } = new List<Genre>();
 
-	}
 }

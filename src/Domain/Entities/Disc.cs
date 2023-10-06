@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 
-namespace Music.Model
+namespace Music.Domain.Entities;
+
+public class Disc: BaseAuditableEntity
 {
-	public class Disc
-	{
-		public int Id { get; set; }
-		public int Number { get; set; }
-		public string Name { get; set; } = string.Empty;
+	public required int Number { get; set; }
+	public string? Name { get; set; }
 
-        public int AlbumId { get; set; }
-		public Album? Album { get; set; }
+    public required int AlbumId { get; set; }
+	public Album? Album { get; set; }
 
-		public List<DiscContribution> DiscContributions { get; set; } = new List<DiscContribution>();
+	public List<DiscContribution> DiscContributions { get; set; } = new List<DiscContribution>();
 
-		public List<Track> Tracks { get; set; } = new List<Track>();
-	}
+	public List<Track> Tracks { get; set; } = new List<Track>();
 }
