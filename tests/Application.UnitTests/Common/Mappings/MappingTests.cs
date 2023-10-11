@@ -1,9 +1,7 @@
-﻿using System.Reflection;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using AutoMapper;
-using Music.Application.Common.Interfaces;
+using Music.Application.Common.Mappings;
 using Music.Application.Common.Models;
-using Music.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 using Music.Application.TodoLists.Queries.GetTodos;
 using Music.Domain.Entities;
 using NUnit.Framework;
@@ -18,7 +16,7 @@ public class MappingTests
     public MappingTests()
     {
         _configuration = new MapperConfiguration(config => 
-            config.AddMaps(Assembly.GetAssembly(typeof(IApplicationDbContext))));
+            config.AddProfile<MappingProfile>());
 
         _mapper = _configuration.CreateMapper();
     }
@@ -34,7 +32,6 @@ public class MappingTests
     [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
     [TestCase(typeof(TodoList), typeof(LookupDto))]
     [TestCase(typeof(TodoItem), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemBriefDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);
@@ -48,9 +45,6 @@ public class MappingTests
             return Activator.CreateInstance(type)!;
 
         // Type without parameterless constructor
-        // TODO: Figure out an alternative approach to the now obsolete `FormatterServices.GetUninitializedObject` method.
-#pragma warning disable SYSLIB0050 // Type or member is obsolete
         return FormatterServices.GetUninitializedObject(type);
-#pragma warning restore SYSLIB0050 // Type or member is obsolete
     }
 }

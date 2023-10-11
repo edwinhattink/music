@@ -1,4 +1,6 @@
-﻿using ValidationException = Music.Application.Common.Exceptions.ValidationException;
+﻿using FluentValidation;
+using MediatR;
+using ValidationException = Music.Application.Common.Exceptions.ValidationException;
 
 namespace Music.Application.Common.Behaviours;
 

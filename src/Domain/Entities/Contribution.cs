@@ -1,6 +1,8 @@
-﻿namespace Music.Domain.Entities;
+﻿using Music.Domain.Enums;
 
-public class Contribution: BaseAuditableEntity
+namespace Music.Domain.Entities;
+
+public class Contribution : BaseAuditableEntity
 {
     public required int TrackId { get; set; }
     public Track? Track { get; set; }
@@ -8,5 +10,5 @@ public class Contribution: BaseAuditableEntity
     public required int ArtistId { get; set; }
     public Artist? Artist { get; set; }
 
-	public required ContributionType ContributionType { get; set; }
+    public required ContributionType ContributionType { get; set; }
 }
